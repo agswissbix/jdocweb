@@ -1,0 +1,142 @@
+Protempore Sagl via Gerolamo Vegezzi 4
+Lugano
+
+Data Pacchetto Ore Riporto ore
+
+27.08.2021 25.00 F-900504 - 25 Ore 2.25 F-190431 - 25 Ore
+
+Data Tecnico Tempo Descrizione
+
+07.06.2020 D.Crudo 1.00 Creazione Account PC e di Posta De Rosa, Impostazione Profilo. -
+
+10.06.2020 D.Crudo
+
+0.75
+
+Preparazione Diritti O365 e Supporto Remoto a Valentina per Condivisioni mail e Calendari. -
+
+23.06.2020 S.Brunel
+
+0.75
+
+Installazione Webcam e Skype for Business. Test di funzionamento e piccola formazione. Materiale fornito: 1x Microsoft HD-3000
+
+26.06.2020 S.Brunel
+
+0.25
+
+Vista importante conference call, presenza sul posto per configurazione webcam, audio, etc. e assicurarsi che tutto funziona durante la call. -
+
+17.08.2020 S.Brunel
+
+Sostituzione Router Centro Business 2.0 difettoso. - Pairing stando al
+
+1.50
+
+telefono con Swisscom - Cambiate impostazioni
+
+- Testato con utenti il funzionamento della rete
+
+20.08.2020 S.Brunel
+
+Sostituzione Access Point Zyxel rotto con nuovo Ubiquiti AC LR. Materiale
+
+1.00
+
+fornito: - 1x Ubiquiti AP AC LR
+
+- 1x Cavo Ethernet 0.5m
+
+01.09.2020 S.Brunel
+
+1.00
+
+Installazione Webcam per PC di Franco Pizzi. Test di funzionamento e piccola formazione. Materiale fornito: Webcam Logitech C525
+
+14.09.2020 R.Piazzon 0.50 Recupero File Cancellato. -
+
+14.09.2020 R.Piazzon 0.25 Assistenza a De Rosa per pubblicazione annuncio. Assistenza telefonica
+
+17.09.2020 L.Nicolussi 0.25 Recupero password App Swisscom Franco Pizzi. -
+
+28.09.2020 S.Brunel
+
+0.50
+
+Assistenza da remoto per PC ex dipendente Molteni e nuova dipendente Dosan. -
+
+29.09.2020 R.Piazzon
+
+0.75
+
+Creazione utenza VPN e configurazione PC + Spiegazione utente Franco Pizzi. -
+
+Swissbix SA Via Lisano 3 Massagno 091 960 22 00 www.swissbix.ch
+
+22.10.2020 S.Brunel
+
+0.25
+
+Supporto remoto - aiuto per impostare stampa da vassoio multifunzione per memo su Outlook. -
+
+26.10.2020 R.Piazzon 0.50 Gloria Ligorio - Richiesta configurazione VPN. PROTEMPORE
+
+27.10.2020 R.Piazzon
+
+0.50
+
+Valentina De Rosa - Configurazione VPN. LWP LEDERMANN, WIETING & PARTNERS
+
+02.11.2020 R.Piazzon 0.25 Gloria Ligorio: connessione remoto in VPN. -
+
+04.11.2020 S.Brunel 1.00 Preparazione PC e Macbook di Jenny Bianchi. -
+
+04.11.2020 S.Brunel
+
+Installazione nuovo PC Jenny - Copia files e config vecchio PC -
+
+4.00
+
+Configurazione accesso remoto da nuovo iMac. Materiale fornito: - 1x HP Elitedesk 800
+
+- 2x HP Elitedisplay E243
+
+06.11.2020 R.Piazzon 1.00 Richiesta configurazione VPN per collegamento remoto a PC ufficio. -
+
+10.11.2020 R.Piazzon 0.75 PROBLEMA PDF E STAMPA E-MAIL. -
+
+12.11.2020 R.Piazzon
+
+0.50
+
+Verifica VPN Jenny Bianchi. Verifica su PC cliente in collegamento remoto + verifica su firewall e settaggio reservation su DHCP
+
+23.11.2020 S.Brunel 0.25 Rinominazione cartella locale user da "molteni" a "dosan". -
+
+01.12.2020 D.Crudo 1.50 Intervento sul Posto per configurazione iPhone MOF e diversi. -
+
+31.12.2020 R.Vittori
+
+Assistenza telefonica non ha risolto il problema del disco C pieno sul PC di
+
+1.00
+
+Giulia. Controllo PC, eliminazione file TEMP. Adesso ci sono quasi 100GB di
+
+spazio libero.. -
+
+18.01.2021 R.Vittori 0.25 Preparazione file PDF per i tapes backup.. -
+
+11.07.2020 D.Crudo 2.00 Aggiornamento Server e Firewall, verifica Logs Server. -
+
+23.09.2020 D.Crudo 2.50 Verifica Server, Aggiornamenti Windows, Aggiornamento Patch Firewall. -
+
+30.11.2020 D.Crudo 1.50 Verifica Logs Server e Patch Aggiornamenti. -
+
+13.05.2020 D.Crudo 1.50 Verifica Server Logs e installazione Patch windows Server. -
+
+Saldo ore -0.50
+
+Swissbix SA Via Lisano 3 Massagno 091 960 22 00 www.swissbix.ch
+
+
