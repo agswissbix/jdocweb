@@ -57,7 +57,7 @@
                                 foreach ($fascie as $key_fascia => $fascia) {
                                 ?>
                                 <td style="border-left: 1px solid black;white-space: nowrap;">
-                                    <input style="width:50px;" type="text" value="<?=$fascia['prezzovendita']?>" name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][value]"> fr/ora <input name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][check]" type="checkbox" />
+                                    <input style="width:50px;" type="text" value="<?=$fascia['prezzovendita']?>" name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][value]"> fr/ora <input name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][check]" type="checkbox" checked />
                                 </td>
                                     
                                 <?php

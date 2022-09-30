@@ -16162,8 +16162,8 @@ GROUP BY user_contratti.recordid_
         $results=$this->Sys_model->db_get('user_informazioni_fatturazione');
         $frasi=array();
         foreach ($results as $key => $row) {
+            $frasi[$row['titolo']]['recordid']=$row['recordid_'];
             $frasi[$row['titolo']]['titolo']=$row['titolo'];
-            $frasi[$row['titolo']]['descrizione'][]=$row['descrizione'];
         }
         $data['frasi']=$frasi;
         $block=$this->load->view('sys/desktop/custom/3p/prepara_offerta_frasi_fatturazione',$data, TRUE);
@@ -16270,9 +16270,22 @@ GROUP BY user_contratti.recordid_
                 $frasiccl[]=$frase['descrizione'];    
             }
             $data['frasiccl']=$frasiccl;
-        }        
-       
+        } 
+        
         $data['frasifatturazione']=array();
+        if(array_key_exists('frasefatturazione', $post))
+        {
+            $frasi_input=$post['frasefatturazione'];
+            $frasifatturazione=array();
+            foreach ($frasi_input as $key_frase_input => $frase_input) {
+                $recordid_frase=$key_frase_input;
+                $frase=$this->Sys_model->get_record('informazioni_fatturazione', $recordid_frase);
+                $frasifatturazione[]=$frase['descrizione'];    
+            }
+            $data['frasifatturazione']=$frasifatturazione;
+        }  
+       
+        
         $data['azienda']=$this->Sys_model->get_record('azienda', $recordid_azienda);
         $data['ccl']=$this->Sys_model->get_record('ccl', $recordid_ccl);
         $data['contatto']=$post['contatto'];

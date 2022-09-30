@@ -41,27 +41,24 @@ $paragraphStyle=array('align' => 'left','spacing' => '0','spacingLineRule' => 'e
 
 $table=$section->addTable(array('cellMarginLeft'=>0));
 $table->addRow(0);
-$table->addCell(6000,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
-$table->addCell(4000,$cellStyle)->addText("Spettabile",$fontSyle,$paragraphStyle);
+$table->addCell(5800,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
+$table->addCell(4200,$cellStyle)->addText("Spettabile",$fontSyle,$paragraphStyle);
 $table->addRow(0);
-$table->addCell(6000,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
-$table->addCell(4000,$cellStyle)->addText(conv_text($azienda['ragionesociale']),$fontSyle,$paragraphStyle);
+$table->addCell(5800,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
+$table->addCell(4200,$cellStyle)->addText(conv_text($azienda['ragionesociale']),$fontSyle,$paragraphStyle);
 $table->addRow(0);
-$table->addCell(6000,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
-$table->addCell(4000,$cellStyle)->addText(conv_text("Alla C.att di ".$contatto),$fontSyle,$paragraphStyle);
+$table->addCell(5800,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
+$table->addCell(4200,$cellStyle)->addText(conv_text("Alla C.att di ".$contatto),$fontSyle,$paragraphStyle);
 $table->addRow(0);
-$table->addCell(6000,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
-$table->addCell(4000,$cellStyle)->addText(conv_text($azienda['indirizzo']),$fontSyle,$paragraphStyle);
+$table->addCell(5800,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
+$table->addCell(4200,$cellStyle)->addText(conv_text($azienda['indirizzo']),$fontSyle,$paragraphStyle);
 $table->addRow(0);
-$table->addCell(6000,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
-$table->addCell(4000,$cellStyle)->addText($azienda['npa']." ".$azienda['localita'],$fontSyle,$paragraphStyle);
+$table->addCell(5800,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
+$table->addCell(4200,$cellStyle)->addText($azienda['npa']." ".$azienda['localita'],$fontSyle,$paragraphStyle);
 $table->addRow(0);
-$table->addCell(6000,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
-$table->addCell(4000,$cellStyle)->addText("Bioggio, 09/09/2022",$fontSyle,$paragraphStyle);
+$table->addCell(5800,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
+$table->addCell(4200,$cellStyle)->addText("Bioggio, 09/09/2022",$fontSyle,$paragraphStyle);
 
-
-$section->addTextBreak();
-$section->addTextBreak();
 $section->addTextBreak();
 $paragraphStyle['spaceAfter']='100';
 $section->addText("Egregi signori,",$fontSyle,$paragraphStyle);
@@ -73,7 +70,7 @@ $section->addText(conv_text("Settore ".$ccl['nomeccl']),$fontSyle,$paragraphStyl
 $fontSyle=array();
 foreach ($prezzi as $key_fascia => $fascia) {
     $paragraphStyle['spaceAfter']='100';
-    $section->addText("Per persone ".$key_fascia,$fontSyle,$paragraphStyle);
+    $section->addText(conv_text($key_fascia." anni di età"),$fontSyle,$paragraphStyle);
     $table=$section->addTable(array('cellMarginLeft'=>0));
     foreach ($fascia as $key => $qualifica) {
         $paragraphStyle['spaceAfter']='0';
@@ -90,8 +87,8 @@ $fontSyle=array();
 foreach ($frasiccl as $key => $fraseccl) {
     $section->addText(conv_text($fraseccl),$fontSyle,$paragraphStyle);
 }
-foreach ($frasifatturazione as $key => $fraseccl) {
-    $section->addText(conv_text($fraseccl),$fontSyle,$paragraphStyle);
+foreach ($frasifatturazione as $key => $frasefatturazione) {
+    $section->addText(conv_text($frasefatturazione),$fontSyle,$paragraphStyle);
 }
 $section->addTextBreak(); 
 $fontSyle=array('bold' => 'true');
