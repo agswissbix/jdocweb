@@ -16272,7 +16272,7 @@ GROUP BY user_contratti.recordid_
             $data['frasiccl']=$frasiccl;
         }        
        
-        
+        $data['frasifatturazione']=array();
         $data['azienda']=$this->Sys_model->get_record('azienda', $recordid_azienda);
         $data['ccl']=$this->Sys_model->get_record('ccl', $recordid_ccl);
         $data['contatto']=$post['contatto'];
