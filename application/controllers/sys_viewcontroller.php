@@ -15536,7 +15536,7 @@ GROUP BY user_contratti.recordid_
         }
         if($statoprocesso=='modificato')
         {
-            $pre_mailbody="Buongiorno <br/> vi informiamo che è appena stata modifica una  richiesta di personale: <br/><br/>";
+            $pre_mailbody="Buongiorno <br/> vi informiamo che è appena stata modificata una  richiesta di personale: <br/><br/>";
         }
         if($statoprocesso=='statomodificato')
         {
@@ -16249,7 +16249,15 @@ GROUP BY user_contratti.recordid_
                     if(array_key_exists('check', $qualifica_prezzo))
                     {
                         $qualifica=$this->Sys_model->db_get_row("user_qualifiche",'*',"recordid_='$qualifica_recordid'");
-                        $data['prezzi'][$key_fascia][$qualifica_recordid]['descrizione']=$qualifica['qualifica']." (".$qualifica['esperienza'].")";
+                        if($this->isnotempty($qualifica['esperienza']))
+                        {
+                            $data['prezzi'][$key_fascia][$qualifica_recordid]['descrizione']=$qualifica['qualifica']." (".$qualifica['esperienza'].")";
+                        }    
+                        else
+                        {
+                           $data['prezzi'][$key_fascia][$qualifica_recordid]['descrizione']=$qualifica['qualifica']; 
+                        }
+                        
                         $data['prezzi'][$key_fascia][$qualifica_recordid]['prezzo']=$qualifica_prezzo['value'];
                     }        
                 }
@@ -16289,7 +16297,10 @@ GROUP BY user_contratti.recordid_
         $data['azienda']=$this->Sys_model->get_record('azienda', $recordid_azienda);
         $data['ccl']=$this->Sys_model->get_record('ccl', $recordid_ccl);
         $data['contatto']=$post['contatto'];
-        $data['userid']=$this->get_userid();
+        $userid=$this->get_userid();
+        $data['userid']=$userid;
+        $user=$this->Sys_model->db_get_row('sys_user','*',"id='$userid'");
+        $data['venditore']=$user['firstname']." ".$user["lastname"];
         echo $this->load->view('sys/desktop/stampe/3p_offerta',$data);
     }    
     

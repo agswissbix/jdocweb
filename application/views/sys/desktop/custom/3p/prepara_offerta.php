@@ -175,6 +175,29 @@ function finalizza_documento_word(el,recordid_ccl)
 }
 
 
+function salva_offerta(el)
+{
+    var serialized_data=[];
+    serialized_data=$('#prepara_offerta').find("select,textarea,input").serializeArray();
+    serialized_data.push({name: 'recordid_azienda', value: $('#records_linkedmaster_field_offerte_azienda').val()});
+    serialized_data.push({name: 'recordid_ccl', value: $('#records_linkedmaster_field_offerte_ccl').val()});
+    
+  
+    $.ajax({
+        type: "POST",
+        url: controller_url+'ajax_salva_offerta/',
+        data: serialized_data,
+        success:function(data){
+            alert('Offerta salvata');
+        },
+        error:function(){
+            alert("ERRORE RICHIESTA AJAX");
+        }
+    })
+}
+
+
+
         
 </script>
 
@@ -263,6 +286,7 @@ function finalizza_documento_word(el,recordid_ccl)
             <div  class="btn_scritta" onclick="finalizza_documento_htmlpdf(this)" style="width: 150px;float: right">html PDF</div>
             <div  class="btn_scritta" onclick="finalizza_documento_word(this)" style="width: 150px;float: right">WORD</div>
             <div  class="btn_scritta" onclick="finalizza_documento_wordpdf(this)" style="width: 150px;float: right">word PDF</div>
+            <div  class="btn_scritta" onclick="salva_offerta(this)" style="width: 150px;float: right">Salva offerta</div>
         </div>
     </div>
 

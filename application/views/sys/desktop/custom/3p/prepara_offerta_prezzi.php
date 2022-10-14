@@ -1,6 +1,30 @@
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
 
-<div id="report_ccl_table" style="margin-top: 100px;">
+<script type="text/javascript">
+$( "#report_ccl_table" ).ready(function(){
+ 
+});
+
+function varia_prezzi(el,direction)
+{
+    $('#prepara_offerta_prezzi').find('.prezzo_value').each(function(i){
+        var value=$(this).val();
+        if(direction=='up')
+         {
+            var newval=(parseFloat(value)+0.1).toFixed(2); 
+         } 
+         if(direction=='down')
+         {
+             var newval=(parseFloat(value)-0.1).toFixed(2);
+         }   
+        
+        $(this).val(newval);
+    })
+}
+
+</script>
+    <div id="prepara_offerta_prezzi" style="margin-top: 100px;">
+        <div style="width: 95%">
             <table style="border-collapse: collapse;width: 100%;">
                 <tbody>
                     <tr class="report_ccl_tr_header">
@@ -57,7 +81,7 @@
                                 foreach ($fascie as $key_fascia => $fascia) {
                                 ?>
                                 <td style="border-left: 1px solid black;white-space: nowrap;">
-                                    <input style="width:50px;" type="text" value="<?=$fascia['prezzovendita']?>" name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][value]"> fr/ora <input name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][check]" type="checkbox" checked />
+                                    <input class="prezzo_value" style="width:50px;" type="text" value="<?=$fascia['prezzovendita']?>" name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][value]"> fr/ora <input name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][check]" type="checkbox" checked />
                                 </td>
                                     
                                 <?php
@@ -84,4 +108,18 @@
                     ?>
                 </tbody>
             </table>
+            <div style="float: right;margin-right: 100px;margin-top: 20px;">
+                
+                
+                <div class="btn_fa fa fa-solid fa-arrow-down" style="height: 20px; margin-left: 20px;float: right" onclick="varia_prezzi(this,'down')"></div>
+                <div class="btn_fa fa fa-solid fa-arrow-up" style="height: 20px;margin-left: 20px;float: right" onclick="varia_prezzi(this,'up')"></div>
+                <div style="float: right" >Variazione prezzi</div>
+                
+            </div>
+        <div style="clear: both">
         </div>
+        
+            
+        </div>
+        </div>
+    

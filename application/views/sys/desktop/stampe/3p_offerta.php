@@ -48,7 +48,7 @@ $table->addCell(5800,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
 $table->addCell(4200,$cellStyle)->addText(conv_text($azienda['ragionesociale']),$fontSyle,$paragraphStyle);
 $table->addRow(0);
 $table->addCell(5800,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
-$table->addCell(4200,$cellStyle)->addText(conv_text("Alla C.att di ".$contatto),$fontSyle,$paragraphStyle);
+$table->addCell(4200,$cellStyle)->addText(conv_text("Alla C.att ".$contatto),$fontSyle,$paragraphStyle);
 $table->addRow(0);
 $table->addCell(5800,$cellStyle)->addText("",$fontSyle,$paragraphStyle);
 $table->addCell(4200,$cellStyle)->addText(conv_text($azienda['indirizzo']),$fontSyle,$paragraphStyle);
@@ -92,14 +92,19 @@ foreach ($frasifatturazione as $key => $frasefatturazione) {
 }
 $section->addTextBreak(); 
 $fontSyle=array('bold' => 'true');
+
 $table=$section->addTable(array('cellMarginLeft'=>0));
 $table->addRow(50);
-$table->addCell(10000,$cellStyle)->addText(conv_text($azienda['ragionesociale']),$fontSyle,$paragraphStyle);
-$table->addCell(1000,$cellStyle)->addText(conv_text("3P clc Sagl"),$fontSyle,$paragraphStyle);
+$table->addCell(7000,$cellStyle)->addText(conv_text($azienda['ragionesociale']),$fontSyle,$paragraphStyle);
+$paragraphStyle['align']='right';
+$table->addCell(3000,$cellStyle)->addText(conv_text("3P clc Sagl"),$fontSyle,$paragraphStyle);
 $table->addRow(50);
-$table->addCell(10000,$cellStyle)->addText(conv_text(""),$fontSyle,$paragraphStyle);
-$table->addCell(1000,$cellStyle)->addText(conv_text("Venditore"),$fontSyle,$paragraphStyle);
+
+
+$table->addCell(7000,$cellStyle)->addText(conv_text(""),$fontSyle,$paragraphStyle);
+$table->addCell(3000,$cellStyle)->addText(conv_text($venditore),$fontSyle,$paragraphStyle);
                 
+$paragraphStyle['align']='left';
 
 $objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
 $filename='test_phpword.docx';

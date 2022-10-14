@@ -68,9 +68,9 @@ $db['bix_mysql']['password'] = 'Jbt$5qNbJXg';
 $db['bix_mysql']['dbdriver'] = 'mysqli';
 
 $db['default_sqlserver']['hostname'] = 'localhost';
-$db['default_sqlserver']['database'] = 'easywork_data';
+$db['default_sqlserver']['database'] = 'winteler_data';
 $db['default_sqlserver']['username'] = 'sa';
-$db['default_sqlserver']['password'] = 'Manager2018.';
+$db['default_sqlserver']['password'] = 'SB.s.s.21';
 $db['default_sqlserver']['dbdriver'] = 'sqlsrv';
 
 
