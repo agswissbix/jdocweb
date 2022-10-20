@@ -11998,7 +11998,14 @@ GROUP BY user_contratti.recordid_
         $data['dipendenti']= $this->Sys_model->db_get("user_dipendenti","recordid_ as itemcode,CONCAT(cognome,' ',nome,' ',id) as itemdesc","true","ORDER BY cognome asc");
         $contratto=$this->Sys_model->db_get_row("user_contratti","*","recordid_='$recordid_contratto'");
         $datainizio=$contratto['datainizio'];
-        $professioni= $this->Sys_model->db_get("user_professioni","*","stato = 'Verificato' AND (('$datainizio'>=datainizio AND datafine is null) OR  ('$datainizio'>=datainizio AND '$datainizio'<=datafine))","ORDER BY professione asc");
+        if($this->isnotempty($contratto['recordidprofessioni_']))
+        {
+            $professioni= $this->Sys_model->db_get("user_professioni","*","stato = 'Verificato'  AND (('$datainizio'>=datainizio AND datafine is null) OR  ('$datainizio'>=datainizio AND '$datainizio'<=datafine))","ORDER BY professione asc");
+        }
+        else
+        {
+            $professioni= $this->Sys_model->db_get("user_professioni","*","stato = 'Verificato' AND statoprofessione='Attiva' AND (('$datainizio'>=datainizio AND datafine is null) OR  ('$datainizio'>=datainizio AND '$datainizio'<=datafine))","ORDER BY professione asc");
+        }    
         $professioni2=array();
         foreach ($professioni as $key => $professione) {
             $recordid_ccl=$professione['recordidccl_'];
@@ -15512,7 +15519,7 @@ GROUP BY user_contratti.recordid_
         $data['recordid']=$recordid;
         $data['users']=$this->Sys_model->db_get('sys_user','*',"disabled='N' AND username not like '%group%' and username!='superuser' and email!=''","ORDER BY firstname");
         //$data['groups']=$this->Sys_model->db_get('sys_lookup_table_item','*',"lookuptableid='gruppo_contatti'");
-        $contatti=$this->Sys_model->db_get('user_contatti','*',"gruppo !=''");
+        $contatti=$this->Sys_model->db_get('user_contatti','*',"gruppo !='' AND stato!='Non attivo'");
         $groups=array();
         foreach ($contatti as $key => $contatto) {
             $contatto_gruppo=$contatto['gruppo'];
@@ -16302,8 +16309,12 @@ GROUP BY user_contratti.recordid_
         $user=$this->Sys_model->db_get_row('sys_user','*',"id='$userid'");
         $data['venditore']=$user['firstname']." ".$user["lastname"];
         echo $this->load->view('sys/desktop/stampe/3p_offerta',$data);
-    }    
+    }   
     
+    public function ajax_salva_offerta()
+    {
+        
+    }
     
     
     

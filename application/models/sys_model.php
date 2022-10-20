@@ -10367,6 +10367,10 @@ class Sys_model extends CI_Model {
       {
           $search_term=$search_term." AND stato = 'Verificato' AND (('$today'>=datainizio AND datafine is null) OR  ('$today'>=datainizio AND '$today'<=datafine))                          ";
       }
+      if($linkedtableid=='professioni')
+      {
+         $search_term=$search_term." AND statoprofessione = 'Attiva'"; 
+      }    
       
       if(($master_tableid=='contratti')&&(($linkedtableid=='ccl')||($linkedtableid=='qualifiche')||($linkedtableid=='fasciaeta')||($linkedtableid=='professioni')))
       {
@@ -10374,6 +10378,11 @@ class Sys_model extends CI_Model {
             $datainizio=$contratto['datainizio'];
             $search_term=$search_term." AND stato = 'Verificato' AND (('$datainizio'>=datainizio AND datafine is null) OR  ('$datainizio'>=datainizio AND '$datainizio'<=datafine))                          ";
       }
+      if($linkedtableid=='professioni')
+      {
+          $search_term=$search_term." AND statoprofessione='Attiva'";
+      }
+          
       
       if($term=="sys_recent")
       {
