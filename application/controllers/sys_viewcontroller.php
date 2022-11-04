@@ -16241,12 +16241,13 @@ GROUP BY user_contratti.recordid_
         echo $block;
     }   
     
-    public function ajax_finalizza_documento_word()
+    public function get_data_offerta_from_post($post)
     {
         $data=array();
-        $post=$_POST;
         $recordid_azienda=$post['recordid_azienda'];
+        $data['recordid_azienda']=$recordid_azienda;
         $recordid_ccl=$post['recordid_ccl'];
+        $data['recordid_ccl']=$recordid_ccl;
         $data['prezzi']=array();
         if(array_key_exists('prezzo', $post))
         {
@@ -16308,13 +16309,120 @@ GROUP BY user_contratti.recordid_
         $data['userid']=$userid;
         $user=$this->Sys_model->db_get_row('sys_user','*',"id='$userid'");
         $data['venditore']=$user['firstname']." ".$user["lastname"];
-        echo $this->load->view('sys/desktop/stampe/3p_offerta',$data);
-    }   
+        return $data;
+        
+    } 
+    
+    public function get_data_offerta_from_record($recordid_offerta)
+    {
+        $data=array();
+        $recordid_azienda="00000000000000000000000000010442";
+        $data['recordid_azienda']=$recordid_azienda;
+        $recordid_ccl="00000000000000000000000000000065";
+        $data['recordid_ccl']=$recordid_ccl;
+        $data['prezzi']=array();
+        $data['frasiccl']=array();
+        $data['userid']=1;
+        
+        
+        $data['frasifatturazione']=array();
+        
+       
+        
+        $data['azienda']=$this->Sys_model->get_record('azienda', $recordid_azienda);
+        $data['ccl']=$this->Sys_model->get_record('ccl', $recordid_ccl);
+        $data['contatto']="test";
+        $data['venditore']="test";
+        return $data;
+        
+    }       
+    
+    public function ajax_finalizza_documento_word()
+    {
+        $data=array();
+        $post=$_POST;
+        $data=$this->get_data_offerta_from_post($post);
+        $data['filename']='offerta.docx';
+        $this->load->view('sys/desktop/stampe/3p_offerta',$data);
+        echo $data['filename'];
+    } 
+    
+    public function ajax_finalizza_documento_pdf()
+    {
+        $data=array();
+        $post=$_POST;
+        $data=$this->get_data_offerta_from_post($post);
+        $data['filename']='offerta.docx';
+        $this->load->view('sys/desktop/stampe/3p_offerta',$data);
+        $pdfname=$this->word_to_pdf($data['filename']);
+        echo $pdfname;
+    } 
+    
+    public function ajax_ristampa_documento_word($recordid_offerta)
+    {
+        $data=array();
+        $data=$this->get_data_offerta_from_record($recordid_offerta);
+        $data['filename']='offerta.docx';
+        $this->load->view('sys/desktop/stampe/3p_offerta',$data);
+        echo $data['filename'];
+    }  
+    
+    public function ajax_ristampa_documento_pdf($recordid_offerta)
+    {
+        $data=array();
+        $data=$this->get_data_offerta_from_record($recordid_offerta);
+        $data['filename']='offerta.docx';
+        $this->load->view('sys/desktop/stampe/3p_offerta',$data);
+        $pdfname=$this->word_to_pdf($data['filename']);
+        echo $pdfname;
+    }  
     
     public function ajax_salva_offerta()
     {
+        $post=$_POST;
+        $data=$this->get_data_offerta_from_post($post);
+        $fields['id']=$this->Sys_model->generate_id('offerte');
+        $fields['recordidazienda_']=$data['recordid_azienda'];
+        $fields['recordidccl_']=$data['recordid_ccl'];
+        $fields['contatto']=$data['contatto'];
+        $fields['venditore']=$data['venditore'];
+        $recordid_offerta=$this->Sys_model->insert_record('offerte', 1, $fields);
+        $prezzi=$data['prezzi'];
+        foreach ($prezzi as $key_fascia => $fascia) {
+            $fields=array();
+            $fields['recordidofferte_']=$recordid_offerta;
+            foreach ($fascia as $qualifica_recordid => $qualifica) {
+                $fields['id']=$this->Sys_model->generate_id('offerta_prezzi');
+                $fields['descrizione']=$qualifica['descrizione'];
+                $fields['prezzo']=$qualifica['prezzo'];
+                $fields['key_fascia']=$key_fascia;
+                $fields['qualifica_recordid']=$qualifica_recordid;
+                $this->Sys_model->insert_record('offerta_prezzi', 1, $fields);
+            }
+        }
+        
+        $frasiccl=$data['frasiccl'];
+        foreach ($frasiccl as $key => $fraseccl) {
+            $fields['id']=$this->Sys_model->generate_id('offerta_informazioni');
+            $fields['fraseccl']=$fraseccl;
+            $fields['recordidofferte_']=$recordid_offerta;
+            $this->Sys_model->insert_record('offerta_informazioni', 1, $fields);
+        }
+        
+    
         
     }
+    
+    
+    public function word_to_pdf($wordname)
+    {
+        $userid=$this->get_userid();
+        $pdfname=str_replace('docx','pdf',$wordname);
+        $command='cd ./tools/OfficeToPDF/ && OfficeToPDF.exe "../../stampe/'.$userid.'/'.$wordname.'" "../../stampe/'.$userid.'/'.$pdfname.'" ';
+        exec($command); 
+        return $pdfname;
+    }
+             
     
     
     
