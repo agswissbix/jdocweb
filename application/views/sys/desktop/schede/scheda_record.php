@@ -124,6 +124,40 @@ function calcola_preavvisodisdetta(el,recordid_contratto)
     });
 }
 
+function offerta_ristampa_documento_word(el,recordid_offerta)
+{
+  
+    var urlprint=controller_url+"/ajax_ristampa_documento_word/"+recordid_offerta;
+    var urldownload=controller_url+"/download_test_phpword/";
+    $.ajax({
+        url: urlprint,
+        success:function(data){
+            alert(data);
+            window.location.href = urldownload + data;
+        },
+        error:function(){
+            alert("ERRORE RICHIESTA AJAX");
+        }
+    })
+}
+
+function offerta_ristampa_documento_pdf(el,recordid_offerta)
+{
+  
+    var urlprint=controller_url+"/ajax_ristampa_documento_pdf/"+recordid_offerta;
+    var urldownload=controller_url+"/download_test_phpword/";
+    $.ajax({
+        url: urlprint,
+        success:function(data){
+            alert(data);
+            window.location.href = urldownload + data;
+        },
+        error:function(){
+            alert("ERRORE RICHIESTA AJAX");
+        }
+    })
+}
+
 $('#<?=$id_scheda_record?>').ready(function(){
         <?php
         if(($layout_scheda=='standard_dati')||($layout_scheda=='standard_allegati'))
@@ -376,6 +410,18 @@ $( ".menu_list_button" ).hover(
                         <?php
                         }
                         ?>
+                            
+                        <?php            
+                        if(($data['settings']['cliente_id']=='3p')&&($tableid=='offerte'))
+                        {
+                        ?>
+                            <li><a onclick="offerta_ristampa_documento_word('<?=$recordid?>')">Stampa word</a></li>
+                            <li><a onclick="offerta_ristampa_documento_pdf('<?=$recordid?>')">Stampa pdf</a></li>
+                        <?php
+                        }
+                        ?>
+                            
+                            
                             
                         <?php            
                         if(($data['settings']['cliente_id']=='3p')&&($tableid=='dipendenti'))
