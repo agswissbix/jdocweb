@@ -9,13 +9,12 @@ function mostra_sottotitoli(el)
 }
 </script>
 
-<div id="prepara_offerta_frasi_ccl" style="margin-top: 100px;">
-            Frasi CCL
+<div id="prepara_offerta_frasi_ccl" style="font-size: 18px;margin-left: 20px;">
             <?php
             foreach ($frasi as $key => $frase) {
             ?>
-            <div>
-                <input type="checkbox" onclick="mostra_sottotitoli(this)" id="fraseccl_id_<?=$key?>" name="fraseccl_titolo[<?=$frase['recordid']?>]" ><?=$frase['titolo']?>
+    <!-- comment --><div style="margin-bottom: 10px;">
+        <input type="checkbox" onclick="mostra_sottotitoli(this)" id="fraseccl_id_<?=$key?>" name="fraseccl_titolo[<?=$frase['recordid']?>]" style="margin-right: 10px;" ><?=$frase['titolo']?>
                 <?php
                 if(count($frase['sottotitolo'])>1)
                 {    
