@@ -1129,6 +1129,8 @@ if($cliente_id=='BaseUniludes')
                 <div id="riepilogo_segnalazioni_container" class="popup"></div>
                 <div id="" class="popup bPopup_generico" style="background-color: white;overflow: scroll"></div>
                 <div id="" class="popup bPopup_generico_small" style="background-color: white;overflow: scroll;height: 20% !important;width: 20% !important;"></div>
+                <div id="" class="popup bPopup_generico_nosize" style="background-color: white;overflow: scroll;height: none !important;width: none !important"></div>
+                <div id="" class="popup bPopup_generico_fullsize" style="background-color: white;overflow: scroll;height: 100% !important;width: 100% !important"></div>
                 <div id="" class="popup bPopup_rapportino" style="background-color: white;overflow: scroll"></div>
                  <div id="" class="popup bPopup_linkedrecords" style="background-color: white;overflow: scroll"></div>
                 <div id="content_container"classbPopup_generico="content_container" >
