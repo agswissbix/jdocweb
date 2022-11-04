@@ -107,7 +107,6 @@ $table->addCell(3000,$cellStyle)->addText(conv_text($venditore),$fontSyle,$parag
 $paragraphStyle['align']='left';
 
 $objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
-$filename='test_phpword.docx';
 $filename= str_replace(" ", "", $filename);
 $filename= utf8_decode($filename);
 $filename= utf8_encode($filename);
@@ -118,5 +117,4 @@ if(!file_exists("./stampe/".$userid)){
     mkdir("./stampe/".$userid);
 }
 $objWriter->save('stampe/'.$userid.'/'.$filename);
-echo urlencode($filename);
 ?>
