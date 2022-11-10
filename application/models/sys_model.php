@@ -19870,6 +19870,10 @@ ORDER BY no ASC
                         $colore_sfondo='Arancione';
                     }
                     
+                    if($contratto_visto=='B')
+                    {
+                        $colore_sfondo='Arancione';
+                    }
                     if($contratto_visto=='amm')
                     {
                         $colore_sfondo='Giallo';
