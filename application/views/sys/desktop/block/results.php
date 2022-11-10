@@ -881,6 +881,10 @@ if($contesto=='stampa_elenco')
                                 }
                                 if($tableid=='contratti')
                                 {
+                                    if(($fieldid=='visto')&&($value=='B'))
+                                    {
+                                        $cell_css=$cell_css.';background-color: coral';
+                                    }
                                     if(($fieldid=='visto')&&($value=='A'))
                                     {
                                         $cell_css=$cell_css.';background-color: yellow';
