@@ -16424,6 +16424,18 @@ GROUP BY user_contratti.recordid_
     }
              
     
+    public function get_pagina1()
+    {
+        $data=array();
+        $this->load->view('pagina1',$data);
+    }
+    
+    public function get_pagina2()
+    {
+        $data=array();
+        echo $this->load->view('pagina2',$data);
+    }
+    
     
     
            
