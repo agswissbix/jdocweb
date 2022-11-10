@@ -883,7 +883,7 @@ if($contesto=='stampa_elenco')
                                 {
                                     if(($fieldid=='visto')&&($value=='B'))
                                     {
-                                        $cell_css=$cell_css.';background-color: coral';
+                                        $cell_css=$cell_css.';background-color: #f7ac45d4';
                                     }
                                     if(($fieldid=='visto')&&($value=='A'))
                                     {
@@ -1013,7 +1013,7 @@ if($contesto=='stampa_elenco')
                                     }
                                     if($colore_sfondo=='Arancione')
                                     {
-                                       $cell_css=$cell_css.'background-color: Coral;'; 
+                                       $cell_css=$cell_css.'background-color: #f7ac45d4;'; 
                                     }
                                     if($colore_sfondo=='Giallo')
                                     {
