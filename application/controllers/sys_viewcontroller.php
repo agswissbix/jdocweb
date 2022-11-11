@@ -11940,6 +11940,7 @@ GROUP BY user_contratti.recordid_
             $data['azienda']= $this->get_record('azienda', $fields['recordidazienda_']);
             $data['professione']= $this->get_record('professioni', $fields['recordidprofessioni_']);
             $recordid_ccl=$data['professione']['recordidccl_'];
+            $recordid_ccl_applicato=$recordid_ccl;
             $data['professione']['cclapplicato']= $this->Sys_model->db_get_value('user_ccl','nomeccl',"recordid_='$recordid_ccl'");
         }
         else
@@ -12051,8 +12052,8 @@ GROUP BY user_contratti.recordid_
         {
             if(($recordid_contratto>='00000000000000000000000000003583')||($id=='3572')||($id=='3412')||($id=='3384')||($id=='3365')||($id=='3186')||($id=='3151')||($id=='3149')||($id=='3128'))
             {
-                $data['cclpp13']='no frase';
-                $festtredsett= $this->Sys_model->db_get_value('user_ccl','festtredsett',"recordid_='$recordid_ccl'");
+                $data['cclpp13']='';
+                $festtredsett= $this->Sys_model->db_get_value('user_ccl','festtredsett',"recordid_='$recordid_ccl_applicato'");
                 if($festtredsett=='si')
                 {
                     $data['cclpp13']=$this->Sys_model->db_get_value('user_testitemplate','testo',"template='Contratto di missione' AND identificatore='CCL PP + 13° settimana'");
