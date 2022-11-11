@@ -21016,7 +21016,8 @@ ORDER BY no ASC
                     {
                       $cclname="CCL Prestito di personale";  
                     }      
-                    $ccl_recordid=$this->db_get_value("user_ccl","recordid_","nomeccl='$cclname'","ORDER BY recordid_ desc");
+                    $today=  date('Y-m-d');
+                    $ccl_recordid=$this->db_get_value("user_ccl","recordid_","nomeccl='$cclname' AND  stato = 'Verificato' AND ((CURDATE()>=datainizio AND datafine is null) OR  (CURDATE()>=datainizio AND CURDATE()<=datafine)","ORDER BY recordid_ desc");
                     $ccl_rgb=$this->db_get_value("user_cclblocchi","sfondo","sfondo!='rgba(0, 0, 0, 0)' AND recordidccl_='$ccl_recordid'");
                     $fields['ccl']=$cclname."#$ccl_rgb#$ccl_recordid";
                     $fields['cliente']=$azienda['ragionesociale']."#$ccl_rgb#$recordid_azienda";
