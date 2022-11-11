@@ -12055,7 +12055,7 @@ GROUP BY user_contratti.recordid_
                 $festtredsett= $this->Sys_model->db_get_value('user_ccl','festtredsett',"recordid_='$recordid_ccl'");
                 if($festtredsett=='si')
                 {
-                    $data['cclpp13']=$this->Sys_model->db_get_value('user_testitemplate','frase');
+                    $data['cclpp13']=$this->Sys_model->db_get_value('user_testitemplate','testo',"template='Contratto di missione' AND identificatore='CCL PP + 13° settimana'");
                 }    
                 
                 $content=$this->load->view('sys/desktop/stampe/3p_contratto_missione_content_v3',$data, TRUE);   
