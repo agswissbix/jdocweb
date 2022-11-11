@@ -9789,8 +9789,7 @@ function ricalcola_listaclienti(el)
         type: "POST",
         data: $(el).closest('form').serializeArray(),
         success: function( response ) {
-            $('.scheda_dati_ricerca').find('#query').val(response);
-            customsearch(el);
+            clickMenu(this,'ajax_load_content_ricerca/listaclienti/desktop');
         },
         error:function(){
             alert('errore');
