@@ -37,6 +37,11 @@ if($table_settings['edit']=='false')
         background-color: #CBEBDC;
     }
     
+    .visto_B
+    {
+        background-color: #f7ac45d4 ;
+    }
+    
     .visto_dir
     {
         background-color: LightGreen ;
