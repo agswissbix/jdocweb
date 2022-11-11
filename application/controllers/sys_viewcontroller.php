@@ -12051,11 +12051,11 @@ GROUP BY user_contratti.recordid_
         {
             if(($recordid_contratto>='00000000000000000000000000003583')||($id=='3572')||($id=='3412')||($id=='3384')||($id=='3365')||($id=='3186')||($id=='3151')||($id=='3149')||($id=='3128'))
             {
-                $data['cclpp13']='';
+                $data['cclpp13']='no frase';
                 $festtredsett= $this->Sys_model->db_get_value('user_ccl','festtredsett',"recordid_='$recordid_ccl'");
                 if($festtredsett=='si')
                 {
-                    $data['cclpp13']='test';
+                    $data['cclpp13']='si frase';
                 }    
                 
                 $content=$this->load->view('sys/desktop/stampe/3p_contratto_missione_content_v3',$data, TRUE);   
