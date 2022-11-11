@@ -21013,7 +21013,7 @@ ORDER BY no ASC
                     $fields['cqdata']=$azienda['datacontrattoquadro'];
                     $cclname=$azienda['ccl'];
                     if($cclname=='Nessun CCL')
-                    {
+                    { 
                       $cclname="CCL Prestito di personale";  
                     }      
                     $today=  date('Y-m-d');
