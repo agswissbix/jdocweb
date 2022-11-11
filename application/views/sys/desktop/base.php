@@ -351,7 +351,7 @@ $(document).ready(function(){
                     console.info('errore');
                 }
             });
-    }, 1000000);
+    }, 10000);
     <?php
     }
     ?>
