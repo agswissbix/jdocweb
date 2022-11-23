@@ -13937,11 +13937,12 @@ GROUP BY user_contratti.recordid_
 
             $json_response=($response->getBody()->getContents());
             $contacts= json_decode($json_response,true);
+            echo "Total contacts:".count($contacts)."<br/>";
             foreach ($contacts as $key => $contact) {
                 
                 $ragionesociale=$contact['name_1'];
                 $bexioid=$contact['id'];
-                
+                $contact_nr=$contact['nr'];
                 $fields['ragionesociale']=$ragionesociale;
                 $fields['bexioid']=$bexioid;
                 $fields['indirizzo']=$contact['address'];
@@ -13963,13 +13964,13 @@ GROUP BY user_contratti.recordid_
                 {
                     $recordid=$jdoc_row['recordid_'];
                     $this->Sys_model->update_record('aziende',1,$fields,"recordid_='$recordid'");
-                    echo("UPDATED ".$ragionesociale.": ".$bexioid.": ".$contact_group_ids."<br/>");
+                    echo("UPDATED ".$ragionesociale."-ID: ".$bexioid."-NR: $contact_nr -".$contact_group_ids."<br/>");
                 }
                 else
                 {
                     $fields['id']= $this->Sys_model->generate_id('aziende');
                     $this->Sys_model->insert_record('aziende',1,$fields);
-                    echo("INSERTED ".$ragionesociale.": ".$bexioid."<br/>");
+                    echo("INSERTED ".$ragionesociale."-ID: ".$bexioid."-NR: $contact_nr <br/>");
                 }
                 
             }
