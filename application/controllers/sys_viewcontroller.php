@@ -13954,7 +13954,7 @@ GROUP BY user_contratti.recordid_
                 $bexiocategory='Cliente';
                 if($contact_group_ids=='3')
                 {
-                    $bexiocategory='Fornitore';
+                    $bexiocategory='Fornitore'; 
                 }
                 $fields['bexiocategory']=$bexiocategory;
                 $ragionesociale= str_replace("'", "''", $ragionesociale);
