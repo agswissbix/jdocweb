@@ -18037,15 +18037,18 @@ GROUP BY user_contratti.recordid_  HAVING user_contratti.recordid_
             {
                 $data=date('Y-m-d', strtotime("+ $counter day", strtotime($data_inizio)));
                 $timbratura= $this->db_get_row('user_rapportidilavoro','*',"recordiddipendenti_='$recordid_dipendente' AND data='$data'");
-                if($timbratura['tipogiorno']=='feriale')
-                {
-                    if($condition!='')
+                if($timbratura!=null)
+                {    
+                    if($timbratura['tipogiorno']=='feriale')
                     {
-                        $condition=$condition.' OR';
+                        if($condition!='')
+                        {
+                            $condition=$condition.' OR';
+                        }
+                        $condition=$condition." data='$data'";
+                        $num_giorniprova=$num_giorniprova+1;
+
                     }
-                    $condition=$condition." data='$data'";
-                    $num_giorniprova=$num_giorniprova+1;
-                    
                 }
                 $counter=$counter+1;
             }
