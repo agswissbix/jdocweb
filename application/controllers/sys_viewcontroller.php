@@ -12716,6 +12716,7 @@ GROUP BY user_contratti.recordid_
     {
         $presenzemensili= $this->Sys_model->db_get_row('user_presenzemensili','*',"recordid_='$recordid_presenzemensili'");
         $recordid_dipendente=$presenzemensili['recordiddipendenti_'];
+        $alias=$presenzemensili['alias'];
         $today=  date('Y-m-d');
         $today_anno=  date('Y');
         $today_mese=  date('m');
@@ -12730,7 +12731,7 @@ GROUP BY user_contratti.recordid_
             $giorno_riferimento=date("Y-m-t",strtotime("$anno-$mese"));
         }
         
-        $rapportino=$this->Sys_model->db_get_row('user_rapportidilavoro',"*","recordiddipendenti_='$recordid_dipendente' AND data='$giorno_riferimento'");
+        $rapportino=$this->Sys_model->db_get_row('user_rapportidilavoro',"*","recordiddipendenti_='$recordid_dipendente' AND alias='$alias' AND data='$giorno_riferimento'");
         $recordid_contratto=$rapportino['recordidcontratti_'];
         if(isnotempty($recordid_contratto))
         {
