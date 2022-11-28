@@ -15660,8 +15660,9 @@ GROUP BY user_contratti.recordid_
     public function api_hubspot_get_deals($dealstage)
     {
         sleep(5);
-        $hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');
-
+        //$hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');
+        $hubSpot = \HubSpot\Factory::createWithAccessToken('pat-eu1-789d7f1d-7f36-4c4f-96a0-02228598bc47');
+        
         $searchRequest = new \HubSpot\Client\Crm\Deals\Model\PublicObjectSearchRequest();
         
         $filterGroup = new \HubSpot\Client\Crm\Deals\Model\FilterGroup();
@@ -15684,6 +15685,36 @@ GROUP BY user_contratti.recordid_
         $deals=reset($deals)['results'];
         //var_dump($deals);
         return $deals;
+    }
+    
+    public function api_hubspot_testprivate_get_deals($dealstage)
+    {
+        
+        sleep(5);
+        $hubSpot = \HubSpot\Factory::createWithAccessToken('pat-eu1-789d7f1d-7f36-4c4f-96a0-02228598bc47');
+
+        $searchRequest = new \HubSpot\Client\Crm\Deals\Model\PublicObjectSearchRequest();
+        
+        $filterGroup = new \HubSpot\Client\Crm\Deals\Model\FilterGroup();
+        
+        $filter = new \HubSpot\Client\Crm\Deals\Model\Filter();
+        $filter->setOperator('EQ');
+        $filter->setPropertyName('dealstage');
+        $filter->setValue($dealstage);
+        $filterGroup->setFilters([$filter]);
+        
+        $searchRequest->setFilterGroups([$filterGroup]);
+        //$searchRequest->setSorts('dealstage');
+        $searchRequest->setLimit(100);
+        $searchRequest->setProperties(["dealname","dealstage","amount","description","acconto","fixed_price","finaziamento_leasing","closedate","hubspot_owner_id","origine_lead"]);
+
+        // @var CollectionResponseWithTotalSimplePublicObject $contactsPage
+        
+        
+        $deals = $hubSpot->crm()->deals()->searchApi()->doSearch($searchRequest);
+        $deals=reset($deals)['results'];
+        //var_dump($deals);
+        var_dump($deals);
     }
     
     public function api_hubspot_sync_deals($type)
@@ -15848,7 +15879,8 @@ GROUP BY user_contratti.recordid_
         $recordid_azienda=$jdoc_row_deal['recordidaziende_'];
         
         
-        $hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');
+        //$hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');
+        $hubSpot = \HubSpot\Factory::createWithAccessToken('pat-eu1-789d7f1d-7f36-4c4f-96a0-02228598bc47');
         
         $total_salesprice=0;
         $total_expectedcost=0;
@@ -15946,7 +15978,8 @@ GROUP BY user_contratti.recordid_
         $dealid=$get['dealid'];
         $dealstage=$get['dealstage'];
         $type=$get['type'];
-        $hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');
+        //$hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');
+        $hubSpot = \HubSpot\Factory::createWithAccessToken('pat-eu1-789d7f1d-7f36-4c4f-96a0-02228598bc47');
         
         if($type=='ICT')
         {
@@ -15981,8 +16014,8 @@ GROUP BY user_contratti.recordid_
     public function api_hubspot_get_deal()
     {
         
-        $hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');
-        
+        //$hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');
+        $hubSpot = \HubSpot\Factory::createWithAccessToken('pat-eu1-789d7f1d-7f36-4c4f-96a0-02228598bc47');
 
 
         $searchRequest = new \HubSpot\Client\Crm\Deals\Model\PublicObjectSearchRequest();
