@@ -14735,7 +14735,8 @@ GROUP BY user_contratti.recordid_
         );
 
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.bexio.com/2.0/'.$bexio_table.'?order_by=id_desc&limit='.$limit.'&offset=0';
+        //&offset=5800
+        $url = 'https://api.bexio.com/2.0/'.$bexio_table.'?order_by=id_desc&limit='.$limit.'';
 
 
         try {
