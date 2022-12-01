@@ -14584,8 +14584,8 @@ GROUP BY user_contratti.recordid_
             }
             
             // righe di dettaglio
-            $sql="UPDATE user_bexio_default_positions SET status='Deleted' WHERE type='Invoice'";
-            $this->Sys_model->execute_query($sql);
+            //$sql="UPDATE user_bexio_default_positions SET status='Deleted' WHERE type='Invoice'";
+            //$this->Sys_model->execute_query($sql);
             $positions=$this->api_bexio_get_positions('kb_invoice',$invoice['id']);
             foreach ($positions as $key => $position) {
                 $position['type']='Invoice';
@@ -14735,7 +14735,7 @@ GROUP BY user_contratti.recordid_
         );
 
         $client = new \GuzzleHttp\Client();
-        $url = 'https://api.bexio.com/2.0/'.$bexio_table.'?order_by=id_desc&limit='.$limit.'';
+        $url = 'https://api.bexio.com/2.0/'.$bexio_table.'?order_by=id_desc&limit='.$limit.'&offset=0';
 
 
         try {
