@@ -19118,7 +19118,7 @@ SET user_contratti.media_totaleore_decimale=temp.totaleore
                         ";
                     $sql="
                         UPDATE user_contratti
-                        SET mediaeffettiva2='$media',oresupplementari2='$totale_oresupplementari'
+                        SET media_datainizio='$datainizio_media',media_datafine='$datafine_media',media_totalegiorni='$totale_giorni',media_totore_contra_dec=$totale_orecontrattuali,media_totaleore_decimale=$totale_oreeffettive_decimale, mediaeffettiva2='$media',oresupplementari2='$totale_oresupplementari'
                         WHERE recordid_='$recordid_contratto'
                             
                         ";
