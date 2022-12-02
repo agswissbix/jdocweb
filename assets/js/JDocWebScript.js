@@ -6871,6 +6871,66 @@ function stampa_selezionati(el,tableid,recordid)
         
     }
     
+    function hide_lookuptable_item(el,lookuptableid,itemcodeval)
+    {
+        var confirmation=confirm('Sicuro di voler nascondere questo valore?')
+        if(confirmation)
+        {
+            $.ajax({
+                   url: controller_url + '/ajax_hide_lookuptable_item/' + lookuptableid,
+                   data: { 
+                           itemcode: itemcodeval, 
+                         },
+                   type: 'post',
+                   success:function(data){ 
+                       if(data!='null')
+                       {
+                           alert('Nascosto');
+                       }
+                       else
+                       {
+                           alert('Valore già esistente');
+                       }
+                   },
+                   error:function(){
+
+                       alert('error');
+                   }
+               });
+        }
+        
+    }
+    
+    function show_lookuptable_item(el,lookuptableid,itemcodeval)
+    {
+        var confirmation=confirm('Sicuro di voler mostrare questo valore?')
+        if(confirmation)
+        {
+            $.ajax({
+                   url: controller_url + '/ajax_show_lookuptable_item/' + lookuptableid,
+                   data: { 
+                           itemcode: itemcodeval, 
+                         },
+                   type: 'post',
+                   success:function(data){ 
+                       if(data!='null')
+                       {
+                           alert('Nuovamente visibile');
+                       }
+                       else
+                       {
+                           alert('Valore già esistente');
+                       }
+                   },
+                   error:function(){
+
+                       alert('error');
+                   }
+               });
+        }
+        
+    }
+    
     function chiudi_gestione_lookuptable(el)
     {
         bPopup_gestione_lookuptable.close();
