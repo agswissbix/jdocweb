@@ -2326,6 +2326,22 @@ Chiara
         $itemcode=$this->Sys_model->delete_lookuptable_item($lookuptableid,$itemcode);
     }
     
+    public function ajax_hide_lookuptable_item($lookuptableid)
+    {
+        $post=$_POST;
+        $itemcode=$post['itemcode'];
+        $sql="UPDATE sys_lookup_table_item SET hidden=1 WHERE lookuptableid='$lookuptableid' AND itemcode='$itemcode'";
+        $this->Sys_model->execute_query($sql);
+    }
+    
+    public function ajax_show_lookuptable_item($lookuptableid)
+    {
+        $post=$_POST;
+        $itemcode=$post['itemcode'];
+        $sql="UPDATE sys_lookup_table_item SET hidden=null WHERE lookuptableid='$lookuptableid' AND itemcode='$itemcode'";
+        $this->Sys_model->execute_query($sql);
+    }
+    
     public function ajax_get_lookuptable($lookuptableid=null,$fieldid=null,$tableid=null)
     {
         
