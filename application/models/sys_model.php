@@ -3726,6 +3726,7 @@ class Sys_model extends CI_Model {
                 $where="LOWER(itemdesc) like '%$term%'";
             }
         }
+        $where=$where." AND (hidden is null OR hidden!=1)";
         $sql="
             SELECT itemcode,itemdesc,itemdesc as label,'false' as link, 'null' as linkfield, 'null' as linkvalue, 'null' as linkedfield, 'null' as linkedvalue
             FROM sys_lookup_table_item 
