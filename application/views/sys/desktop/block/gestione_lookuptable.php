@@ -17,7 +17,11 @@ $lookuptable_items=$data['lookuptable_items'];
         $test=  str_replace('"', '\"', $item['itemcode']);
         $test=htmlentities($test, ENT_QUOTES, 'UTF-8');
         ?>
-        <div class="btn_fa fa fa-close tooltip" title="Elimina valore" style="float: right;" onclick='delete_lookuptable_item(this,"<?=$lookuptableid?>","<?=$test?>")'></div>
+        
+        
+        <div class="btn_scritta  tooltip" title="Elimina" style="float: right;" onclick='delete_lookuptable_item(this,"<?=$lookuptableid?>","<?=$test?>")'>Elimina</div>
+        <div class="btn_scritta  tooltip" title="Nascondi" style="float: right;" onclick='hide_lookuptable_item(this,"<?=$lookuptableid?>","<?=$test?>")'>Nascondi</div>
+        <div class="btn_scritta  tooltip" title="Mostra" style="float: right;" onclick='show_lookuptable_item(this,"<?=$lookuptableid?>","<?=$test?>")'>Mostra</div>
         <div class="clearboth"></div>
     </div>
     <?php
