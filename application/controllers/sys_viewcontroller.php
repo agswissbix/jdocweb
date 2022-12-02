@@ -15126,6 +15126,7 @@ GROUP BY user_contratti.recordid_
         $fields['creatorid_']= $this->get_userid();
         
         $this->Sys_model->update_record('contratti', 1, $fields,"recordid_='$recordid_contratto_modificato' ");
+        $this->Sys_model->custom_3p_salva_contratto($recordid_contratto_modificato);
         echo $recordid_contratto_modificato;
     }
     
