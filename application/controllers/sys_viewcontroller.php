@@ -14476,7 +14476,7 @@ GROUP BY user_contratti.recordid_
     }
     
     
-    public function api_bexio_set_invoices()
+    public function api_bexio_set_invoices($offset=0)
     {
         ini_set('max_execution_time', 2300);
         echo "Inizio api_bexio_set_invoices: ".date("Y-m-d H:i")."<br/>";
@@ -14485,7 +14485,7 @@ GROUP BY user_contratti.recordid_
        
         $today=date('Y-m-d');
         $reminders_count=0;
-        $invoices=$this->api_bexio_get_default('kb_invoice','bexio_invoices',2000);
+        $invoices=$this->api_bexio_get_default('kb_invoice','bexio_invoices',2000,$offset);
         foreach ($invoices as $key => $invoice) {
             $invoiceid=$invoice['id'];
             echo "Inserimento ".$invoiceid."<br/>";
@@ -14734,7 +14734,7 @@ GROUP BY user_contratti.recordid_
         
     }
     
-    public function api_bexio_get_default($bexio_table,$jdoc_table,$limit='null')
+    public function api_bexio_get_default($bexio_table,$jdoc_table,$limit='null',$offset=0)
     {
         $jdoc_fields=$this->Sys_model->db_get("sys_field","*","tableid='$jdoc_table' AND tablelink is null");
         $fields=array();
@@ -14752,7 +14752,7 @@ GROUP BY user_contratti.recordid_
 
         $client = new \GuzzleHttp\Client();
         //&offset=5800
-        $url = 'https://api.bexio.com/2.0/'.$bexio_table.'?order_by=id_desc&limit='.$limit.'';
+        $url = 'https://api.bexio.com/2.0/'.$bexio_table.'?order_by=id_desc&limit='.$limit.'&offset='.$offset.'';
 
 
         try {
