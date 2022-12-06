@@ -14614,7 +14614,7 @@ GROUP BY user_contratti.recordid_
                 $position['accountgroup']=$account['accountgroup'];
                 $position['seller']=$seller;
                 $position['contactname']=$contactname;
-                
+                $position['parent_id']=$invoice['id'];
                 $position['status']=$stato;
                 $position['date']=$date;
                         
