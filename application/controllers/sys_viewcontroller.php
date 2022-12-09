@@ -15455,7 +15455,7 @@ GROUP BY user_contratti.recordid_
     
     public function script_custom_3p_salva_contratti()
     {
-        $sql="SELECT * FROM user_contratti WHERE (datafine is null AND datadisdetta is null) OR datafine>'2021-01-01' OR datadisdetta>'2021-01-01'";
+        $sql="SELECT * FROM user_contratti WHERE (datafine is null AND datadisdetta is null) OR datafine>'2022-01-01' OR datadisdetta>'2022-01-01'";
         $contratti=$this->Sys_model->select($sql);
         foreach ($contratti as $key => $contratto) {
             $this->Sys_model->add_custom_update_php('custom_3p_salva_contratto',$contratto['recordid_']);
