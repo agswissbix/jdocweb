@@ -6,20 +6,51 @@ $( "#report_ccl_table" ).ready(function(){
 });
 
 function varia_prezzi(el,direction)
-{
-    $('#prepara_offerta_prezzi').find('.prezzo_value').each(function(i){
+{       var limitup=parseFloat(<?=$user_settings['offerta_limitup']?>);
+        var limitdown=parseFloat(<?=$user_settings['offerta_limitdown']?>);
+        console.info(limitup);
+        console.info(limitdown);
+        
+        var eccesso=false;
+        $('#prepara_offerta_prezzi').find('.prezzo_value').each(function(i){
+        var prezzooriginale=$(this).data("prezzooriginale");
+        console.info(prezzooriginale);
         var value=$(this).val();
         if(direction=='up')
          {
             var newval=(parseFloat(value)+0.1).toFixed(2); 
+            var variazione= newval-prezzooriginale;
+            console.info('Variazione: '+variazione);
+            if(variazione>limitup)
+            {  
+                eccesso=true;
+            }
          } 
          if(direction=='down')
          {
              var newval=(parseFloat(value)-0.1).toFixed(2);
+             var variazione= prezzooriginale-newval;
+             console.info('Variazione: '+variazione);
+             if(variazione>limitdown)
+             {  
+                 eccesso=true;
+             }
          }   
         
-        $(this).val(newval);
+        if(eccesso)
+        {
+            console.info('Eccesso');
+        }  
+        else
+        {
+            $(this).val(newval);
+        }
+        
     })
+    if(eccesso)
+        {
+            alert('Eccesso');
+        }  
 }
 
 </script>
@@ -81,7 +112,7 @@ function varia_prezzi(el,direction)
                                 foreach ($fascie as $key_fascia => $fascia) {
                                 ?>
                                 <td style="border-left: 1px solid black;white-space: nowrap;">
-                                    <input class="prezzo_value" style="width:50px;" type="text" value="<?=$fascia['prezzovendita']?>" name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][value]"> fr/ora <input name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][check]" type="checkbox" checked />
+                                    <input class="prezzo_value" style="width:50px;" type="text" value="<?=$fascia['prezzovendita']?>" name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][value]" data-prezzooriginale="<?=$fascia['prezzovendita']?>"> fr/ora <input name="prezzo[<?=$key_fascia?>][<?=$qualifica['recordid_']?>][check]" type="checkbox" checked />
                                 </td>
                                     
                                 <?php
@@ -113,7 +144,7 @@ function varia_prezzi(el,direction)
                 
                 <div class="btn_fa fa fa-solid fa-arrow-down" style="height: 20px; margin-left: 20px;float: right" onclick="varia_prezzi(this,'down')"></div>
                 <div class="btn_fa fa fa-solid fa-arrow-up" style="height: 20px;margin-left: 20px;float: right" onclick="varia_prezzi(this,'up')"></div>
-                <div style="float: right" >Variazione prezzi</div>
+                <div style="float: right" >Variazione prezzi <?=$user_settings['offerta_limitdown']?></div>
                 
             </div>
         <div style="clear: both">

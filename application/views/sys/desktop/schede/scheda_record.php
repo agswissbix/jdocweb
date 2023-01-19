@@ -505,6 +505,15 @@ $( ".menu_list_button" ).hover(
                          <?php
                         }
                         ?>
+                            
+                            <?php            
+                        if(($data['settings']['cliente_id']=='3p')&&($tableid=='listaclienti'))
+                        {
+                        ?>
+                            <li><a onclick="custom3p_prepara_notifica_email(this,'<?=$data['recordid']?>')">Invia notifica email</a></li>
+                         <?php
+                        }
+                        ?>
                     </ul>
             </div>
             

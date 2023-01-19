@@ -14201,6 +14201,8 @@ class Sys_model extends CI_Model {
         $settings=$this->add_setting($settings, 'lista_disponibilita', 'true;false', $currentvalues, 'true',$userid);
         $settings=$this->add_setting($settings, 'dipendenti_da_chiudere', 'true;false', $currentvalues, 'true',$userid);
         $settings=$this->add_setting($settings, 'dipendenti_da_riaprire', 'true;false', $currentvalues, 'true',$userid);
+        $settings=$this->add_setting($settings, 'offerta_limitdown', '', $currentvalues, '0',$userid);
+        $settings=$this->add_setting($settings, 'offerta_limitup', '', $currentvalues, '0',$userid);
         $groups=  $this->db_get('sys_user', '*', "description='GROUP'");
         $group_options="";
         foreach ($groups as $key => $group) {
