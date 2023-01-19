@@ -14253,18 +14253,28 @@ GROUP BY user_contratti.recordid_
         }
     }
     
-    
-    public function api_bexio_set_orders($orderid_request=null,$limit=null)
+    public function api_bexio_set_orders_all()
     {
-        ini_set('max_execution_time', 2400);
-        echo "Inizio api_bexio_set_orders: ".date("Y-m-d H:i")."<br/>";
+        ini_set('max_execution_time', 3600);
         $sql="UPDATE user_bexio_orders SET status='Deleted'";
         $this->Sys_model->execute_query($sql);
         
         $sql="UPDATE user_bexio_default_positions SET status='Deleted' WHERE type='Order'";
         $this->Sys_model->execute_query($sql);
         
-        $orders=$this->api_bexio_get_default('kb_order','bexio_orders',$limit);
+        $this->api_bexio_set_orders(null,null,0);
+        $this->api_bexio_set_orders(null,null,1990);
+        $this->api_bexio_set_orders(null,null,3980);
+        $this->api_bexio_set_orders(null,null,5970);
+    }
+    
+    public function api_bexio_set_orders($orderid_request=null,$limit=null,$offset=0)
+    {
+        
+        echo "Inizio api_bexio_set_orders: ".date("Y-m-d H:i")." OFFSET: $offset<br/>";
+        
+        
+        $orders=$this->api_bexio_get_default('kb_order','bexio_orders',$limit,$offset);
         foreach ($orders as $key => $order) {
             $orderid=$order['id'];
             
@@ -14341,6 +14351,15 @@ GROUP BY user_contratti.recordid_
                         $json_response=($response->getBody()->getContents());
                         $repetition= json_decode($json_response,true);
                         $order['repetition_start']=$repetition['start'];
+                        if(array_key_exists('end', $repetition))
+                        {
+                        $order['repetition_end']=$repetition['end'];
+                        $today=date("Y-m-d");
+                        if($today>$repetition['end'])
+                        {
+                            $order['status']='Ended';
+                        }
+                        }
                         $repetition_type=$repetition['repetition']['type'];
                         $repetition_interval=$repetition['repetition']['interval'];
                         if(($repetition_type=='monthly')&&($repetition_interval==1))
@@ -14349,17 +14368,35 @@ GROUP BY user_contratti.recordid_
                             $order['total_net_yearly']=$order['total_net']*12;
                             $order['total_yearly']=$order['total']*12;
                         }
+                        if(($repetition_type=='monthly')&&($repetition_interval==2))
+                        {
+                            $order['repetition_type']='Bimonthly';
+                            $order['total_net_yearly']=$order['total_net']*6;
+                            $order['total_yearly']=$order['total']*6;
+                        }
                         if(($repetition_type=='monthly')&&($repetition_interval==3))
                         {
                             $order['repetition_type']='Quarterly';
                             $order['total_net_yearly']=$order['total_net']*4;
                             $order['total_yearly']=$order['total']*4;
                         }
-                        if(($repetition_type=='yearly'))
+                        if(($repetition_type=='yearly')&&($repetition_interval==1))
                         {
                             $order['repetition_type']='Yearly';
                             $order['total_net_yearly']=$order['total_net'];
                             $order['total_yearly']=$order['total'];
+                        }
+                        if(($repetition_type=='yearly')&&($repetition_interval==2))
+                        {
+                            $order['repetition_type']='Biennial';
+                            $order['total_net_yearly']=$order['total_net']/2;
+                            $order['total_yearly']=$order['total']/2;
+                        }
+                        if(($repetition_type=='yearly')&&($repetition_interval==3))
+                        {
+                            $order['repetition_type']='Triennial';
+                            $order['total_net_yearly']=$order['total_net']/2;
+                            $order['total_yearly']=$order['total']/2;
                         }
 
                     }
@@ -14475,13 +14512,25 @@ GROUP BY user_contratti.recordid_
         }
     }
     
-    
-    public function api_bexio_set_invoices($offset=0)
+    public function api_bexio_set_invoices_all()
     {
-        ini_set('max_execution_time', 2300);
-        echo "Inizio api_bexio_set_invoices: ".date("Y-m-d H:i")."<br/>";
+        ini_set('max_execution_time', 7200);
         $sql="UPDATE user_bexio_invoices SET status='Deleted'";
-        //$this->Sys_model->execute_query($sql);
+        $this->Sys_model->execute_query($sql);
+        
+        $sql="UPDATE user_bexio_default_positions SET status='Deleted' WHERE type='Invoice'";
+        $this->Sys_model->execute_query($sql);
+        
+        $this->api_bexio_set_invoices(null,null,0);
+        $this->api_bexio_set_invoices(null,null,1990);
+        $this->api_bexio_set_invoices(null,null,3980);
+        $this->api_bexio_set_invoices(null,null,5970);
+        $this->api_bexio_set_invoices(null,null,7870);
+    }
+    
+    public function api_bexio_set_invoices($invoiceid_request=null,$limit=null,$offset=0)
+    {
+        echo "Inizio api_bexio_set_invoices: ".date("Y-m-d H:i")."<br/>";
        
         $today=date('Y-m-d');
         $reminders_count=0;
@@ -14942,10 +14991,19 @@ GROUP BY user_contratti.recordid_
     //custom easywork
     public function testsqlserver()
     {
-        echo 'test';
-        $sql="SELECT * FROM L1001";
-        $result=$this->Sys_model->select($sql);
-        var_dump($result);
+        $serverName = "SRVJDOC01";
+        $connectionInfo = array( "Database"=>"3pclc_data", "UID"=>"sa", "PWD"=>"3pclc,.-22");
+        $conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+        if( $conn ) 
+        {
+           echo "Connection ok.<br />";
+        }
+        else
+        {
+             echo "Connection could not be established.<br />";
+             die( print_r( sqlsrv_errors(), true));
+        }
     }
     
     public function custom_easywork_generazionedocumenti()
@@ -16203,6 +16261,7 @@ GROUP BY user_contratti.recordid_
         }
         
         $data['ccl']= $this->Sys_model->db_get_row('user_ccl','*',"recordid_='$recordid_ccl'");
+        $data['user_settings']= $this->Sys_model->get_user_settings($this->get_userid());
         
         $block=$this->load->view('sys/desktop/custom/3p/prepara_offerta_prezzi',$data, TRUE);
         echo $block;
