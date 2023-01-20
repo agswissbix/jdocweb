@@ -16571,6 +16571,8 @@ GROUP BY user_contratti.recordid_
                 $rows[]=$row;
             }
             var_dump($rows);
+            $command='copy E:\Docuware\Platten\Archivio.000002\000\000\190\0000048640\ffae5033-0ea8-429f-8ebf-1ef3e0b71006.pdf E:\Adiuto\Immission\Docuware\12345.pdf';
+            exec($command);
         }
         else
         {
