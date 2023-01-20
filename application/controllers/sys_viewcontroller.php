@@ -16571,8 +16571,18 @@ GROUP BY user_contratti.recordid_
                 $rows[]=$row;
             }
             var_dump($rows);
-            $command='copy E:\Docuware\Platten\Archivio.000002\000\000\190\0000048640\ffae5033-0ea8-429f-8ebf-1ef3e0b71006.pdf E:\Adiuto\Immission\Docuware\12345.pdf';
-            exec($command);
+            $dw_filename="ffae5033-0ea8-429f-8ebf-1ef3e0b71006.pdf";
+            $dw_filename_split=explode('.',$dw_filename);
+            if(count($dw_filename_split)>1)
+            {
+                $dw_filename_withoutext=$dw_filename_split[0];
+                $dw_filename_ext=$dw_filename_split[1];
+                $adi_filename="1234".".".$dw_filename_ext;
+                $command='copy "E:\Docuware\Platten\Archivio.000002\000\000\190\0000048640\''.$dw_filename.'" "E:\Adiuto\Immission\Docuware\''.$adi_filename.'"';
+                echo $command."<br/>";
+                exec($command);
+            }   
+            
         }
         else
         {
