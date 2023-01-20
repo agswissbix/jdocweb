@@ -16564,7 +16564,7 @@ GROUP BY user_contratti.recordid_
 
         if( $conn ) 
         {
-            $sql="SELECT TOP (10) FROM DW_Archivio_Dipendenti_SEC ";
+            $sql="SELECT TOP (10) * FROM DW_Archivio_Dipendenti_SEC";
             $stmt = sqlsrv_query($conn, $sql);
             $rows=array();
             while($row = sqlsrv_fetch_array($stmt)) {
