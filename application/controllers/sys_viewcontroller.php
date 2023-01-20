@@ -16556,6 +16556,29 @@ GROUP BY user_contratti.recordid_
         echo $this->load->view('pagina2',$data);
     }
     
+    public function docuware_import()
+    {
+        $serverName = "SRVJDOC01";
+        $connectionInfo = array( "Database"=>"3pclc_data", "UID"=>"sa", "PWD"=>"3pclc,.-22");
+        $conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+        if( $conn ) 
+        {
+            $sql="SELECT TOP (10) FROM DW_Archivio_Dipendenti_SEC ";
+            $stmt = sqlsrv_query($conn, $sql);
+            $rows=array();
+            while($row = sqlsrv_fetch_array($stmt)) {
+                $rows[]=$row;
+            }
+            var_dump($rows);
+        }
+        else
+        {
+             echo "Connection could not be established.<br />";
+             die( print_r( sqlsrv_errors(), true));
+        }
+    }
+    
     
     
            
