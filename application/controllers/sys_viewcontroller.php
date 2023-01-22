@@ -16584,6 +16584,16 @@ GROUP BY user_contratti.recordid_
                     $adi_filename=$dw_id."_".$dw_docid.".".$dw_filename_ext;
                     $command='copy "E:\Docuware\Platten\Archivio.000002\\'.$dw_location.'" "E:\Adiuto\Immission\Docuware\\'.$adi_filename.'"';
                     echo $command."<br/>";
+                    $sql="UPDATE DW_Archivio_Dipendenti_SEC SET TEXTANNOTATION='exported' WHERE id=$dw_docid ";
+                    $stmt = sqlsrv_query( $conn, $sql);
+                    if( $stmt === false ) {
+                         echo "$dw_docid Error";
+                    }
+                    else{
+                         echo "$dw_docid exported";
+                    }
+                        
+                        
                     //exec($command);
                 }   
             }
