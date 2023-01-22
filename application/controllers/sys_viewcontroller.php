@@ -16564,24 +16564,32 @@ GROUP BY user_contratti.recordid_
 
         if( $conn ) 
         {
-            $sql="SELECT TOP (10) * FROM DW_Archivio_Dipendenti_SEC";
+            $sql="SELECT TOP (1) * FROM DW_Archivio_Dipendenti_SEC ORDER BY ID DESC";
             $stmt = sqlsrv_query($conn, $sql);
             $rows=array();
             while($row = sqlsrv_fetch_array($stmt)) {
                 $rows[]=$row;
             }
-            var_dump($rows);
-            $dw_filename="ffae5033-0ea8-429f-8ebf-1ef3e0b71006.pdf";
-            $dw_filename_split=explode('.',$dw_filename);
-            if(count($dw_filename_split)>1)
-            {
-                $dw_filename_withoutext=$dw_filename_split[0];
-                $dw_filename_ext=$dw_filename_split[1];
-                $adi_filename="1234".".".$dw_filename_ext;
-                $command='copy "E:\Docuware\Platten\Archivio.000002\000\000\190\0000048640\\'.$dw_filename.'" "E:\Adiuto\Immission\Docuware\\'.$adi_filename.'"';
-                echo $command."<br/>";
-                exec($command);
-            }   
+            foreach ($rows as $key => $row) {
+                $dw_id=$row['ID'];
+                $dw_docid=$row['DOCID'];
+                $dw_location=$row['LOCATION'];
+                $dw_location_split=explode('\\',$dw_location);
+                $dw_filename=end($dw_location_split);
+                $dw_filename_split=explode('.',$dw_filename);
+                if(count($dw_filename_split)>1)
+                {
+                    $dw_filename_withoutext=$dw_filename_split[0];
+                    $dw_filename_ext=$dw_filename_split[1];
+                    $adi_filename=$dw_id."_".$dw_docid.".".$dw_filename_ext;
+                    $command='copy "E:\Docuware\Platten\Archivio.000002\\'.$dw_location.'" "E:\Adiuto\Immission\Docuware\\'.$adi_filename.'"';
+                    echo $command."<br/>";
+                    //exec($command);
+                }   
+            }
+            //$dw_filename="ffae5033-0ea8-429f-8ebf-1ef3e0b71006.pdf";
+            //$dw_filename_split=explode('.',$dw_filename);
+            
             
         }
         else
