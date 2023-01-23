@@ -16565,7 +16565,7 @@ GROUP BY user_contratti.recordid_
         if( $conn ) 
         {
             $sql="
-                SELECT TOP (20) DW_Archivio_Dipendenti_SEC.ID,DW_Archivio_Dipendenti_SEC.DOCID,DW_Archivio_Dipendenti_SEC.LOCATION,TIPO_DOCUMENTO_ AS TIPO
+                SELECT TOP (100) DW_Archivio_Dipendenti_SEC.ID,DW_Archivio_Dipendenti_SEC.DOCID,DW_Archivio_Dipendenti_SEC.LOCATION,TIPO_DOCUMENTO_ AS TIPO
                 FROM DW_Archivio_Dipendenti_SEC 
                 LEFT JOIN DW_Archivio_Dipendenti ON DW_Archivio_Dipendenti_SEC.DOCID=DW_Archivio_Dipendenti.DWDOCID
                 ORDER BY ID desc
@@ -16588,7 +16588,7 @@ GROUP BY user_contratti.recordid_
                     $dw_filename_withoutext=$dw_filename_split[0];
                     $dw_filename_ext=$dw_filename_split[1];
                     $adi_filename=$dw_id."_".$dw_docid.".".$dw_filename_ext;
-                    if($dw_tipo=='MISSIONE')
+                    if(($dw_tipo=='MISSIONE')||($dw_tipo=='CLC DETERMINATO')||($dw_tipo=='CLC INDETERMINATO'))
                     {
                       $adi_filename="CON".$adi_filename;  
                     }   
@@ -16598,17 +16598,17 @@ GROUP BY user_contratti.recordid_
                     }    
                     $command='copy "E:\Docuware\Platten\Archivio.000002\\'.$dw_location.'" "E:\Adiuto\Immission\Docuware\\'.$adi_filename.'"';
                     echo $command."<br/>";
-                    //exec($command);
+                    exec($command);
                     $sql="UPDATE DW_Archivio_Dipendenti_SEC SET TEXTANNOTATION='exported' WHERE id=$dw_id ";
                     echo "<br/> $sql <br/>" ;
-                    /*$stmt = sqlsrv_query( $conn, $sql);
+                    $stmt = sqlsrv_query( $conn, $sql);
                     if( $stmt === false ) {
                          echo "$dw_id Error";
                     }
                     else{
                          echo "$dw_id exported";
                     }
-                      */  
+                        
                         
                     
                 }   
