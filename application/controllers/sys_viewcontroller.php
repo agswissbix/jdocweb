@@ -16568,7 +16568,7 @@ GROUP BY user_contratti.recordid_
                 SELECT TOP (100) DW_Archivio_Dipendenti_SEC.ID,DW_Archivio_Dipendenti_SEC.DOCID,DW_Archivio_Dipendenti_SEC.LOCATION,TIPO_DOCUMENTO_ AS TIPO
                 FROM DW_Archivio_Dipendenti_SEC 
                 LEFT JOIN DW_Archivio_Dipendenti ON DW_Archivio_Dipendenti_SEC.DOCID=DW_Archivio_Dipendenti.DWDOCID
-                WHERE TEXTANNOTATION!= exported
+                WHERE TEXTANNOTATION is null OR TEXTANNOTATION!= 'exported'
                 ORDER BY ID desc
                 ";
             $stmt = sqlsrv_query($conn, $sql);
