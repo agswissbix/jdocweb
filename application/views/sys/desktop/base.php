@@ -1113,7 +1113,7 @@ if($cliente_id=='BaseUniludes')
             <?php
             }
             ?>  
-            <div class="btn" onclick="aggiorna_anagrafiche()" style="float: right;text-align: center;margin-right: 20px;border: 1px solid black;padding: 2px;">
+            <div class="btn" onclick="aggiorna_anagrafiche()" style="float: right;text-align: center;margin-right: 20px;border: 1px solid black;padding: 2px;cursor: pointer">
                 Aggiorna anagrafiche
             </div>
             
