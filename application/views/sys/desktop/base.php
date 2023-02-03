@@ -368,7 +368,34 @@ if (element != 'input' && element != 'textarea') {
 }
 });
 */
-
+function aggiorna_anagrafiche()
+{
+    bPopup_generico=$('.bPopup_generico').bPopup();
+    $('.bPopup_generico').html("Aggiornamento anagrafica aziende in corso...");
+    
+    $.ajax({
+        //url: 'http://localhost:8822/dashboard/',
+        url: 'http://localhost:8822/bixdata/index.php/bix_datagateway_controller/syncdata/azienda',
+        dataType:'html',
+        success:function(data){
+            $('.bPopup_generico').html("Aggiornamento aziende eseguito. Aggiornamento dipendenti in corso....");
+            $.ajax({
+                //url: 'http://localhost:8822/dashboard/',
+                url: 'http://localhost:8822/bixdata/index.php/bix_datagateway_controller/syncdata/dipendenti',
+                dataType:'html',
+                success:function(data){
+                    $('.bPopup_generico').html("Aggiornamento dipendenti eseguito. <br/><br/> AGGIORNAMENTO COMPLETATO");
+                },
+                error:function(){
+                    alert('errore');
+                }
+            });
+        },
+        error:function(){
+            alert('errore');
+        }
+    });
+}    
 </script>
         <title>Jdoc Web</title>
         <?php
@@ -1085,7 +1112,10 @@ if($cliente_id=='BaseUniludes')
                     </div>
             <?php
             }
-            ?>           
+            ?>  
+            <div class="btn" onclick="aggiorna_anagrafiche()" style="float: right;text-align: center;margin-right: 20px;border: 1px solid black;padding: 2px;">
+                Aggiorna anagrafiche
+            </div>
             
             
             <?php
