@@ -735,7 +735,7 @@ function cambio_orariomedio(el)
         <div class="row h2"></div>
         <div class="row" style="position: absolute">
             <div style="width: 100%;height: 10px;position: relative;top: 0px;right: 0px;font-family: IDAutomationHC39M">
-                    <?=$fields['id']?>
+                    (<?=$fields['id']?>)
             </div>
         </div>
         <div class="row">
