@@ -45,7 +45,7 @@
 | the active record class
 */
 
-$active_group = 'bix_mysql';
+$active_group = 'default_mysql';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
