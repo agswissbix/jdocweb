@@ -15736,8 +15736,10 @@ GROUP BY user_contratti.recordid_
     public function api_hubspot_get_deals($dealstage)
     {
         sleep(5);
-        //$hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');
-        $hubSpot = \HubSpot\Factory::createWithAccessToken('pat-eu1-789d7f1d-7f36-4c4f-96a0-02228598bc47');
+        //$hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a'); //DEPRECATED API KEY
+        //$hubSpot = \HubSpot\Factory::createWithAccessToken('pat-eu1-789d7f1d-7f36-4c4f-96a0-02228598bc47');
+        $hubSpot = \HubSpot\Factory::createWithAccessToken('pat-eu1-3c337734-1543-42c4-9b6d-b4f426c66761');
+        
         
         $searchRequest = new \HubSpot\Client\Crm\Deals\Model\PublicObjectSearchRequest();
         
@@ -15750,16 +15752,13 @@ GROUP BY user_contratti.recordid_
         $filterGroup->setFilters([$filter]);
         
         $searchRequest->setFilterGroups([$filterGroup]);
-        //$searchRequest->setSorts('dealstage');
         $searchRequest->setLimit(100);
         $searchRequest->setProperties(["dealname","dealstage","amount","description","acconto","fixed_price","finaziamento_leasing","closedate","hubspot_owner_id","origine_lead"]);
 
-        // @var CollectionResponseWithTotalSimplePublicObject $contactsPage
-        
-        
         $deals = $hubSpot->crm()->deals()->searchApi()->doSearch($searchRequest);
+        
         $deals=reset($deals)['results'];
-        //var_dump($deals);
+        var_dump($deals);
         return $deals;
     }
     
@@ -15895,7 +15894,8 @@ GROUP BY user_contratti.recordid_
             $fields['user_jdoc']=$jdocuserid;
             $username=$this->Sys_model->db_get_value('sys_user','firstname',"id='$jdocuserid'");
             $fields['username']=$username;
-        $hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');    
+        //$hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');   
+        $hubSpot = \HubSpot\Factory::createWithAccessToken('pat-eu1-789d7f1d-7f36-4c4f-96a0-02228598bc47');
         $deal_associations = $hubSpot->crm()->deals()->associationsApi()->getAll($deal_id, "company", null, 500);
         $deal_associations=reset($deal_associations)['results'];
         $company_id='';

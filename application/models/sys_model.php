@@ -19107,6 +19107,7 @@ SET user_contratti.media_totaleore_decimale=temp.totaleore
                         $totale_oresupplementari="-".$totale_oresupplementari;
                     }
                     
+                    /*
                    echo "
                         <b>Data inizio: </b>$datainizio_media <br/>
                         <b>Data fine: </b>$datafine_media <br/>
@@ -19118,6 +19119,7 @@ SET user_contratti.media_totaleore_decimale=temp.totaleore
                         <b>Ore supplementari decimale: </b>$totale_oresupplementari_decimale <br/>
                         <b>Ore supplementari : </b>$totale_oresupplementari <br/>
                         ";
+                     * */
                     $sql="
                         UPDATE user_contratti
                         SET media_datainizio='$datainizio_media',media_datafine='$datafine_media',media_totalegiorni='$totale_giorni',media_totore_contra_dec=$totale_orecontrattuali,media_totaleore_decimale=$totale_oreeffettive_decimale, mediaeffettiva2='$media',oresupplementari2='$totale_oresupplementari'
