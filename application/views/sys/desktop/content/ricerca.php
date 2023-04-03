@@ -321,8 +321,6 @@ $(document).ready(function(){
                             <form>
                                 <input type="hidden" name="tableid" value="<?=$tableid?>">
                                 <input type="hidden" name="tables[tempcontrol][type]" value="master">
-                                <span style="float: left;margin-right: 10px;margin-left: 10px;font-weight: bold">Data dal </span><input class="smartsearch_field_data field fieldtoblur fieldInput fieldRange fieldValue0 ricerca first  " style="border: 1px solid #dedede !important;width: 130px;" id="tables-dipendenti-search-t_1-fields-id-f_01520519577-value-0" name="custom_fields[datadal]" type="date" placeholder="" value="" maxlength="254" tabindex="" data-last_field="" data-lastval="" onchange="$('#mediaperiodo_dal').val($(this).val())">
-                                <span style="float: left;margin-right: 10px;margin-left: 10px;font-weight: bold">Data al </span><input class="field fieldtoblur fieldInput fieldRange fieldValue0 ricerca first  " style="border: 1px solid #dedede !important;width: 130px;" id="tables-dipendenti-search-t_1-fields-id-f_01520519577-value-0" name="custom_fields[dataal]" type="date" placeholder="" value="" maxlength="254" tabindex="" data-last_field="" data-lastval="" onchange="$('#mediaperiodo_al').val($(this).val())">
                                 <div id="btn_smartsearch_cerca" class="btn_scritta" style="float: left;margin-left: 20px;" onclick="ricalcola_listaclienti(this)">Ricalcola</div>
                                 
                             </form>

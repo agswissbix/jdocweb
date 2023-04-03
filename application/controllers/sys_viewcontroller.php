@@ -2930,8 +2930,6 @@ Chiara
     {
         $post=$_POST;
         $tableid=$post['tableid'];
-        $datadal=$post['custom_fields']['datadal'];
-        $dataal=$post['custom_fields']['dataal'];
         
         //$this->generate_listaclienti($datadal,$dataal);
         $this->Sys_model->custom3p_genera_listaclienti();

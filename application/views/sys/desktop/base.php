@@ -377,12 +377,13 @@ function aggiorna_anagrafiche()
         url: 'http://192.168.2.55:8822/bixdata/index.php/bix_datagateway_controller/syncdata/azienda',
         dataType:'html',
         success:function(data){
-            $('.bPopup_generico').html("Aggiornamento aziende eseguito. Aggiornamento dipendenti in corso....");
+            $('.bPopup_generico').html(data);
+            //$('.bPopup_generico').html("Aggiornamento aziende eseguito. Aggiornamento dipendenti in corso....");
             $.ajax({
                 url: 'http://192.168.2.55:8822/bixdata/index.php/bix_datagateway_controller/syncdata/dipendenti',
                 dataType:'html',
                 success:function(data){
-                    $('.bPopup_generico').html("Aggiornamento dipendenti eseguito. <br/><br/> AGGIORNAMENTO COMPLETATO");
+                    //$('.bPopup_generico').html("Aggiornamento dipendenti eseguito. <br/><br/> AGGIORNAMENTO COMPLETATO");
                 },
                 error:function(){
                     alert('errore');
