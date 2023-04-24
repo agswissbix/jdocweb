@@ -56,21 +56,15 @@ $db['default']['dbdriver'] = 'postgre';
 
 
 $db['default_mysql']['hostname'] = 'localhost';
-$db['default_mysql']['database'] = 'jdoc3p';
+$db['default_mysql']['database'] = 'jdoc';
 $db['default_mysql']['username'] = 'root';
 $db['default_mysql']['password'] = '';
 $db['default_mysql']['dbdriver'] = 'mysqli';
 
-$db['bix_mysql']['hostname'] = '10.0.0.23';
-$db['bix_mysql']['database'] = 'jdoc';
-$db['bix_mysql']['username'] = 'vtenext';
-$db['bix_mysql']['password'] = 'Jbt$5qNbJXg';
-$db['bix_mysql']['dbdriver'] = 'mysqli';
-
 $db['default_sqlserver']['hostname'] = 'localhost';
-$db['default_sqlserver']['database'] = 'winteler_data';
+$db['default_sqlserver']['database'] = 'easywork_data';
 $db['default_sqlserver']['username'] = 'sa';
-$db['default_sqlserver']['password'] = 'SB.s.s.21';
+$db['default_sqlserver']['password'] = 'Manager2018.';
 $db['default_sqlserver']['dbdriver'] = 'sqlsrv';
 
 
