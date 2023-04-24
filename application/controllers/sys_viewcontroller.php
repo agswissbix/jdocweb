@@ -2930,8 +2930,6 @@ Chiara
     {
         $post=$_POST;
         $tableid=$post['tableid'];
-        $datadal=$post['custom_fields']['datadal'];
-        $dataal=$post['custom_fields']['dataal'];
         
         //$this->generate_listaclienti($datadal,$dataal);
         $this->Sys_model->custom3p_genera_listaclienti();
@@ -14225,10 +14223,14 @@ GROUP BY user_contratti.recordid_
             {
                 $recordid=$jdoc_row['recordid_'];
                 $this->Sys_model->update_record('bexio_contacts',1,$contact,"recordid_='$recordid'");
+                var_dump($contact);
+                echo "<b>UPDATED</b><br/><br/>";
             }
             else
             {
                 $recordid=$this->Sys_model->insert_record('bexio_contacts',1,$contact);
+                var_dump($contact);
+                echo "<b>INSERTED</b><br/><br/>";
             }
         }
     }
@@ -15912,12 +15914,13 @@ GROUP BY user_contratti.recordid_
                $company_name=$company['properties']['name'];
                $fields['company_name']= str_replace("'", "''", $company_name);
                $company_name= str_replace("'", "''", $company_name);
-               $jdoc_row= $this->Sys_model->db_get_row('user_aziende','*',"ragionesociale='$company_name'");
+               //$jdoc_row= $this->Sys_model->db_get_row('user_aziende','*',"ragionesociale='$company_name'");
+               $jdoc_row= $this->Sys_model->db_get_row('user_bexio_contacts','*',"name_1='$company_name'");
                if($jdoc_row!=null)
                {
-                   $azienda_recordid=$jdoc_row['recordid_'];
-                   $fields['recordidaziende_']=$azienda_recordid;
-                   $fields['company_bexioid']=$jdoc_row['bexioid'];
+                   //$azienda_recordid=$jdoc_row['recordid_'];
+                   //$fields['recordidaziende_']=$azienda_recordid;
+                   $fields['company_bexioid']=$jdoc_row['id'];
                }
             }
         }
@@ -16000,6 +16003,7 @@ GROUP BY user_contratti.recordid_
                 $fields['hubspot_dealid']=$deal_id;
                 $fields['name']=$line_item['name'];
                 $fields['quantity']=$line_item['quantity'];
+                $fields['unit_price']=$line_item['price'];
                 $fields['unit_expected_cost']=$line_item['hs_cost_of_goods_sold'];
                 $fields['expected_cost']=$line_item['hs_cost_of_goods_sold']*$line_item['quantity'];
                 $fields['price']=$line_item['amount'];
