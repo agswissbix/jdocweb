@@ -16052,9 +16052,8 @@ GROUP BY user_contratti.recordid_
     }
     
     
-    public function api_hubspot_update_dealstage($dealid,$dealstage)
+    public function api_hubspot_update_dealstage($type,$dealid,$dealstage)
     {
-        $type=$get['type'];
         //$hubSpot = \HubSpot\Factory::createWithApiKey('eu1-9c95-52d3-4463-ac6f-7ff40aa3591a');
         $hubSpot = \HubSpot\Factory::createWithAccessToken('pat-eu1-789d7f1d-7f36-4c4f-96a0-02228598bc47');
         
