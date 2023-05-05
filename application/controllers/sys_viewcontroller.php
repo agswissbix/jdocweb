@@ -16066,21 +16066,25 @@ GROUP BY user_contratti.recordid_
             $dealstage= $this->Sys_model->db_get_value('user_hubspotsalestages','hubspotid_printing',"salestage='$dealstage'");
         }        
         
-        $properties = [
+        if($this->isnotempty($dealstage))
+        {
+            $properties = [
             "dealstage" => $dealstage
-        ];
-        $SimplePublicObjectInput = new \HubSpot\Client\Crm\deals\Model\PublicObjectSearchRequest(['properties' => $properties]);
-        
-        try {
-            $apiResponse = $hubSpot->crm()->deals()->basicApi()->update($dealid, $SimplePublicObjectInput, null);
-            //var_dump($apiResponse);
-            echo '{
-  "result": "Updates"}';
-        } catch (ApiException $e) {
-            //echo "Exception when calling basic_api->update: ", $e->getMessage();
-            echo '{
-  "result": "Exception"}';
+            ];
+            $SimplePublicObjectInput = new \HubSpot\Client\Crm\deals\Model\PublicObjectSearchRequest(['properties' => $properties]);
+
+            try {
+                $apiResponse = $hubSpot->crm()->deals()->basicApi()->update($dealid, $SimplePublicObjectInput, null);
+                //var_dump($apiResponse);
+                echo '{
+                "result": "Updates"}';
+                } catch (ApiException $e) {
+                //echo "Exception when calling basic_api->update: ", $e->getMessage();
+                echo '{
+                 "result": "Exception"}';
+            }
         }
+        
         
         
 
