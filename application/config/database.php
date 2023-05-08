@@ -45,7 +45,7 @@
 | the active record class
 */
 
-$active_group = 'default_mysql';
+$active_group = 'bix_mysql';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
@@ -66,6 +66,12 @@ $db['default_sqlserver']['database'] = 'easywork_data';
 $db['default_sqlserver']['username'] = 'sa';
 $db['default_sqlserver']['password'] = 'Manager2018.';
 $db['default_sqlserver']['dbdriver'] = 'sqlsrv';
+
+$db['bix_mysql']['hostname'] = '10.0.0.23';
+$db['bix_mysql']['database'] = 'jdoc';
+$db['bix_mysql']['username'] = 'vtenext';
+$db['bix_mysql']['password'] = 'Jbt$5qNbJXg';
+$db['bix_mysql']['dbdriver'] = 'mysqli';
 
 
 $db['default']['dbprefix'] = '';

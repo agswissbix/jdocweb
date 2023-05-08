@@ -14276,7 +14276,76 @@ GROUP BY user_contratti.recordid_
         echo "Inizio api_bexio_set_orders: ".date("Y-m-d H:i")." OFFSET: $offset<br/>";
         
         
-        $orders=$this->api_bexio_get_default('kb_order','bexio_orders',$limit,$offset);
+        
+        
+        ini_set('max_execution_time', 3600);
+        $sql="UPDATE user_bexio_orders SET status='Complete'";
+        $this->Sys_model->execute_query($sql);
+        
+        $sql="UPDATE user_bexio_default_positions SET status='Deleted' WHERE type='Order'";
+        $this->Sys_model->execute_query($sql);
+        
+        
+        
+        $jdoc_fields=$this->Sys_model->db_get("sys_field","*","tableid='bexio_orders' AND tablelink is null");
+        $fields=array();
+        $orders=array();
+        foreach ($jdoc_fields as $key => $jdoc_field) {
+            $jdoc_field_id=$jdoc_field['fieldid'];
+            $fields[$jdoc_field_id]="";
+        }
+        $token="eyJraWQiOiI2ZGM2YmJlOC1iMjZjLTExZTgtOGUwZC0wMjQyYWMxMTAwMDIiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmaW5hbmNlQHN3aXNzYml4LmNoIiwibG9naW5faWQiOiI0NDYxNTI1OS1jOTYwLTExZTktYjE2Mi1hNGJmMDExY2U4NzIiLCJjb21wYW55X2lkIjoicThqZWR2cmV0dmQ1IiwidXNlcl9pZCI6OTQ4NDMsImF6cCI6ImV2ZXJsYXN0LXRva2VuLW9mZmljZS1jbGllbnQiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIGFsbCB0ZWNobmljYWwiLCJpc3MiOiJodHRwczpcL1wvaWRwLmJleGlvLmNvbSIsImV4cCI6MzE3MDg0MjYyOCwiaWF0IjoxNTk0MDQyNjI4LCJjb21wYW55X3VzZXJfaWQiOjEsImp0aSI6ImYxMTAxNDQwLWZlZjgtNGYyOS1hZjI4LWQyMWQ1MTRiMWRjOCJ9.bVGm_y-FZP13NqT0NdBIak5_nAqWM8Sa0Ggos10xc7nYblK-TB3O42cu7Me1mNGtN4zEckYHHwr1qItc49kSnppr8xuEdEIqqs-SpB0Cw3arxuBxU8-HodUraAtg_HhJalkeDHw0wk0qhLCAOk8mnJ3FLl_LF-LMeC2M3uobDKv-PCutWRP60kPpQ0EbRCdezbFKDrMav6-yqxF4l8IrdINt_W10o8ntWWhaUStY1I0z02FmjFoE0FsnczOITJsUvQMe7VckGsg_oU1GZ0HMipXLCYL7RsCOBhF_5M6G7bEXz0CXE0Z5tbpVlYFoeu074NcUO67lx1L8PUMVOEQ8GUvxUGOL8rbYDKa3Wz9jmmp81BUP0ENtXfjgZp-qG0QHglPWgw1aUekM9amFUYJgXdFyunXeLFtpghwpfHc6FgbkKcl2WGYPm-t4_aVlJACyifC_Gi8xrblze1ZbJY3gDxcLzpUyG3kJIHOsbQX_2Kau_btmZy9RSDuxEZ-x_ow3m1UfbPwz4c8lJb0p23Nwpbt8f_EG4gEZZ6TJvjP74-ikub_4ZxUaH1RiRICbJL6cazBozxxxxhLZ-8irbVnsUXDCLLgEhzjZ4ahFOMFUayL8ShhvVvL8SnRZW6YK-TtRP5Djv4UetoVJh-2JMihhp3NDtFGu2DV9axq2rs9eCTc";
+
+        $headers = array(
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token.'',
+            'Content-Type' => 'application/json',
+        );
+
+        $client = new \GuzzleHttp\Client();
+        
+        $request_body = '[
+            {
+                "field": "kb_item_status_id",
+                "value": "5",
+                "criteria": "="
+            }
+        ]';
+        
+        $url = 'https://api.bexio.com/2.0/kb_order/search?order_by=id_desc&limit='.$limit.'&offset='.$offset.'';
+
+
+        try {
+            $response = $client->request('POST', $url, array(
+                'headers' => $headers,
+                'body' => $request_body,
+            ));
+
+            $json_response=($response->getBody()->getContents());
+            $rows= json_decode($json_response,true);
+            foreach ($rows as $key => $row) {
+                foreach ($row as $column => $value) {
+                    if(array_key_exists($column, $fields))
+                    {
+                        $fields[$column]=$value;
+                    }
+                }
+                $orders[]=$fields;
+               
+            }
+        }
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
+            // handle exception or api errors.
+            print_r($e->getMessage());
+        }
+        
+        
+        
+        
+        
+        
+        
+        
         foreach ($orders as $key => $order) {
             $orderid=$order['id'];
             
@@ -14289,31 +14358,8 @@ GROUP BY user_contratti.recordid_
             
             // testata
             $kb_item_status_id=$order['kb_item_status_id'];
-            $stato='';
-            if($kb_item_status_id=='5')
-            {
-                $stato='In Progress';
-            }
-            if($kb_item_status_id=='6')
-            {
-                $stato='Complete';
-            }
-            if($kb_item_status_id=='7')
-            {
-                $stato='Draft';
-            }
-            if($kb_item_status_id=='8')
-            {
-                $stato='Pending';
-            }
-            if($kb_item_status_id=='15')
-            {
-                $stato='Partial';
-            }
-            if($kb_item_status_id=='21')
-            {
-                $stato='Archived';
-            }
+            $stato='In Progress';
+            
             $order['status']=$stato;
             
             
@@ -15803,10 +15849,10 @@ GROUP BY user_contratti.recordid_
         if($type=='ICT')
         {
             $deals_ict_chiusovinto=$this->api_hubspot_get_deals('closedwon');
-            $deals_ict_rifiutato=$this->api_hubspot_get_deals('58730966');
+            //$deals_ict_rifiutato=$this->api_hubspot_get_deals('58730966');
             $deals_ict_validazionetecnica=$this->api_hubspot_get_deals('56091101');
             $deals_ict_controllosolvibilita=$this->api_hubspot_get_deals('58541271');
-            $deals=array_merge($deals_ict_chiusovinto,$deals_ict_rifiutato,$deals_ict_validazionetecnica,$deals_ict_controllosolvibilita);
+            $deals=array_merge($deals_ict_chiusovinto,$deals_ict_validazionetecnica,$deals_ict_controllosolvibilita);
             //$deals=$deals_ict_chiusovinto;
             //$deals_ict_attesaacconto=$this->api_hubspot_get_deals('56091102');
             //$deals_ict_ordinemateriale=$this->api_hubspot_get_deals('58730967');
@@ -15821,10 +15867,10 @@ GROUP BY user_contratti.recordid_
         {
             
             $deals_printing_chiusovinto=$this->api_hubspot_get_deals('59453137');
-            $deals_printing_rifiutato=$this->api_hubspot_get_deals('59453135');
+            //$deals_printing_rifiutato=$this->api_hubspot_get_deals('59453135');
             $deals_printing_validazionetecnica=$this->api_hubspot_get_deals('59453136');
             $deals_printing_controllosolvibilita=$this->api_hubspot_get_deals('59482352');
-            $deals=array_merge($deals_printing_chiusovinto,$deals_printing_rifiutato,$deals_printing_validazionetecnica,$deals_printing_controllosolvibilita);
+            $deals=array_merge($deals_printing_chiusovinto,$deals_printing_validazionetecnica,$deals_printing_controllosolvibilita);
             
             
             //$deals_printing_attesaacconto=$this->api_hubspot_get_deals('59482353');
