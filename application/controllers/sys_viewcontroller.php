@@ -14282,7 +14282,7 @@ GROUP BY user_contratti.recordid_
         $sql="UPDATE user_bexio_orders SET status='Complete'";
         $this->Sys_model->execute_query($sql);
         
-        $sql="UPDATE user_bexio_default_positions SET status='Deleted' WHERE type='Order'";
+        $sql="UPDATE user_bexio_default_positions SET status='Complete' WHERE type='Order'";
         $this->Sys_model->execute_query($sql);
         
         
@@ -14479,6 +14479,7 @@ GROUP BY user_contratti.recordid_
                 $accountid=$position['account_id'];
                 $account=$this->Sys_model->db_get_row("user_bexio_accounts","*","id='$accountid'");
                 $position['account']=$account['name'];
+                $position['account_no']=$account['account_no'];
                 $position['accountgroup']=$account['accountgroup'];
                 $position['seller']=$seller;
                 $position['contactname']=$contactname;
