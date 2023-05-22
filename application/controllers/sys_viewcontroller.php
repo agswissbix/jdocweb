@@ -14257,26 +14257,7 @@ GROUP BY user_contratti.recordid_
     
     public function api_bexio_set_orders_all()
     {
-        ini_set('max_execution_time', 3600);
-        $sql="UPDATE user_bexio_orders SET status='Deleted'";
-        $this->Sys_model->execute_query($sql);
-        
-        $sql="UPDATE user_bexio_default_positions SET status='Deleted' WHERE type='Order'";
-        $this->Sys_model->execute_query($sql);
-        
-        $this->api_bexio_set_orders(null,null,0);
-        $this->api_bexio_set_orders(null,null,1990);
-        $this->api_bexio_set_orders(null,null,3980);
-        $this->api_bexio_set_orders(null,null,5970);
-    }
-    
-    public function api_bexio_set_orders($orderid_request=null,$limit=null,$offset=0)
-    {
-        
-        echo "Inizio api_bexio_set_orders: ".date("Y-m-d H:i")." OFFSET: $offset<br/>";
-        
-        
-        
+        echo "INIZIO api_bexio_set_orders_all: ".date("Y-m-d H:i")."<br/><br/><br/><br/>";
         
         ini_set('max_execution_time', 3600);
         $sql="UPDATE user_bexio_orders SET status='Complete'";
@@ -14284,6 +14265,25 @@ GROUP BY user_contratti.recordid_
         
         $sql="UPDATE user_bexio_default_positions SET status='Complete' WHERE type='Order'";
         $this->Sys_model->execute_query($sql);
+        
+        $this->api_bexio_set_orders(null,500,0);
+        $this->api_bexio_set_orders(null,500,500);
+        $this->api_bexio_set_orders(null,500,1000);
+        $this->api_bexio_set_orders(null,500,1500);
+        
+        echo "FINE api_bexio_set_orders_all: ".date("Y-m-d H:i")."<br/><br/><br/><br/>";
+    }
+    
+    public function api_bexio_set_orders($orderid_request=null,$limit=null,$offset=0)
+    {
+        
+        echo "INIZIO api_bexio_set_orders: ".date("Y-m-d H:i")."LIMIT: $limit - OFFSET: $offset<br/><br/><br/><br/>";
+        
+        
+        
+        
+        ini_set('max_execution_time', 3600);
+        
         
         
         
@@ -14354,7 +14354,7 @@ GROUP BY user_contratti.recordid_
             $title=$order['title'];
             $order['bexio_id']=$orderid;
             $date=$order['is_valid_from'];
-            echo "<b>Inserimento ".$orderid." - $title </b> <br/>";
+            
             
             // testata
             $kb_item_status_id=$order['kb_item_status_id'];
@@ -14458,11 +14458,13 @@ GROUP BY user_contratti.recordid_
             $jdoc_row= $this->Sys_model->db_get_row('user_bexio_orders','*',"id='$orderid'");
             if($jdoc_row!=null)
             {
+                echo "<br/><b>Aggiornamento ".$orderid." - $title </b> <br/>";
                 $recordid_order=$jdoc_row['recordid_'];
                 $this->Sys_model->update_record('bexio_orders',1,$order,"recordid_='$recordid_order'");
             }
             else
             {
+                echo "<br/><b>Inserimento ".$orderid." - $title </b> <br/>";
                 $recordid_order=$this->Sys_model->insert_record('bexio_orders',1,$order);
             }
             
@@ -14471,7 +14473,7 @@ GROUP BY user_contratti.recordid_
             $positions=$this->api_bexio_get_positions('kb_order',$order['id']);
             foreach ($positions as $key => $position) {
                 $text=$position['text'];
-                echo "Inserimento riga di dettaglio: $text ";
+                
                 $position['type']='Order';
                 $position['recordidbexio_orders_']=$recordid_order;
                 
@@ -14490,11 +14492,13 @@ GROUP BY user_contratti.recordid_
                 $jdoc_row= $this->Sys_model->db_get_row('user_bexio_default_positions','*',"id='$positionid'");
                 if($jdoc_row!=null)
                 {
+                    echo "Aggiornamento riga di dettaglio: ".$position['id']."<br/>";
                     $recordid_position=$jdoc_row['recordid_'];
                     $this->Sys_model->update_record('bexio_default_positions',1,$position,"recordid_='$recordid_position'");
                 }
                 else
                 {
+                    echo "Inserimento riga di dettaglio: ".$position['id']."<br/>";
                     $recordid_position=$this->Sys_model->insert_record('bexio_default_positions',1,$position);
                 }
                 
@@ -14509,7 +14513,7 @@ GROUP BY user_contratti.recordid_
             echo "Inserimento ".$order['id']." ESEGUITO<br/>";
         }
         }
-        echo "Fine api_bexio_set_orders: ".date("Y-m-d H:i")."<br/>";
+        echo "FINE api_bexio_set_orders: ".date("Y-m-d H:i")."<br/>";
     }
     
     function set_pianificazioniordine($recordid_ordine)
