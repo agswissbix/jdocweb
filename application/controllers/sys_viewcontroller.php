@@ -15854,7 +15854,7 @@ GROUP BY user_contratti.recordid_
         if($type=='ICT')
         {
             $deals_ict_chiusovinto=$this->api_hubspot_get_deals('closedwon');
-            //$deals_ict_rifiutato=$this->api_hubspot_get_deals('58730966');
+            $deals_ict_rifiutato=$this->api_hubspot_get_deals('58730966');
             $deals_ict_validazionetecnica=$this->api_hubspot_get_deals('56091101');
             $deals_ict_controllosolvibilita=$this->api_hubspot_get_deals('58541271');
             $deals=array_merge($deals_ict_chiusovinto,$deals_ict_validazionetecnica,$deals_ict_controllosolvibilita);
@@ -15872,7 +15872,7 @@ GROUP BY user_contratti.recordid_
         {
             
             $deals_printing_chiusovinto=$this->api_hubspot_get_deals('59453137');
-            //$deals_printing_rifiutato=$this->api_hubspot_get_deals('59453135');
+            $deals_printing_rifiutato=$this->api_hubspot_get_deals('59453135');
             $deals_printing_validazionetecnica=$this->api_hubspot_get_deals('59453136');
             $deals_printing_controllosolvibilita=$this->api_hubspot_get_deals('59482352');
             $deals=array_merge($deals_printing_chiusovinto,$deals_printing_validazionetecnica,$deals_printing_controllosolvibilita);
