@@ -14409,7 +14409,9 @@ GROUP BY user_contratti.recordid_
                         }
                         }
                         $repetition_type=$repetition['repetition']['type'];
+                        $order['bexio_repetition_type']=$repetition_type;
                         $repetition_interval=$repetition['repetition']['interval'];
+                        $order['bexio_repetition_interval']=$repetition_interval;
                         if(($repetition_type=='monthly')&&($repetition_interval==1))
                         {
                             $order['repetition_type']='Monthly';
@@ -14427,6 +14429,12 @@ GROUP BY user_contratti.recordid_
                             $order['repetition_type']='Quarterly';
                             $order['total_net_yearly']=$order['total_net']*4;
                             $order['total_yearly']=$order['total']*4;
+                        }
+                        if(($repetition_type=='monthly')&&($repetition_interval==6))
+                        {
+                            $order['repetition_type']='Half-Yearly';
+                            $order['total_net_yearly']=$order['total_net']*6;
+                            $order['total_yearly']=$order['total']*6;
                         }
                         if(($repetition_type=='yearly')&&($repetition_interval==1))
                         {
