@@ -12603,8 +12603,8 @@ GROUP BY user_contratti.recordid_
         //$dipendente= $this->Sys_model->db_get_row('user_dipendenti', 'id,cognome,nome,datainiziocollaborazione', "recordid_='$recordid_dipendente'");
         //$data_inizio=$dipendente['datainiziocollaborazione'];
         
-        $recordid_ultimocontratto=$this->Sys_model->db_get_value('user_contratti','recordid_',"recordiddipendenti_='$recordid_dipendente' AND (alias is null OR alias='')","ORDER BY datainizio desc");
-        $this->Sys_model->custom_3p_salva_contratto($recordid_ultimocontratto);
+        //$recordid_ultimocontratto=$this->Sys_model->db_get_value('user_contratti','recordid_',"recordiddipendenti_='$recordid_dipendente' AND (alias is null OR alias='')","ORDER BY datainizio desc");
+        //$this->Sys_model->custom_3p_salva_contratto($recordid_ultimocontratto);
 
         //if($data_inizio>="2019-07-26")
         //{

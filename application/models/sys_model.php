@@ -220,7 +220,7 @@ class Sys_model extends CI_Model {
     {
         $data=date("Y-m-d");
         $ora=date("H:i:s");
-        $fields['id']= $this->generate_seriale('systemlog', 'id');
+        //$fields['id']= $this->generate_seriale('systemlog', 'id');
         $fields['data']=$data;
         $fields['ora']=$ora;
         $fields['funzione']=$funzione;
@@ -229,7 +229,7 @@ class Sys_model extends CI_Model {
         {
             echo $funzione." | ".$testo."<br/>";
         }
-        $this->insert_record('systemlog', 1, $fields);
+        //$this->insert_record('systemlog', 1, $fields);
     }
     
     public function set_logquery($funzione,$sql_finale)
