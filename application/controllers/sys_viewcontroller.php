@@ -16690,7 +16690,8 @@ GROUP BY user_contratti.recordid_
     }
     
     function add_custom_update_php_sync_timbrature()
-    {
+    { 
+        
         $this->Sys_model->add_custom_update_php('custom_3p_sync_timbrature','00000000000000000000000000047592');
     }
     
