@@ -16689,6 +16689,30 @@ GROUP BY user_contratti.recordid_
         }
     }
     
+    function add_custom_update_php_sync_timbrature()
+    {
+        $this->Sys_model->add_custom_update_php('custom_3p_sync_timbrature','00000000000000000000000000046976');
+    }
+    
+    function custom_3p_sync_timbrature($recordid_presenze)
+    {
+        $presenze=$this->Sys_model->db_get_row('user_presenzemensili', '*', "recordid_='$recordid_presenze'");
+        
+        if($presenze!=null)
+        {
+            $dipendente_id=$presenze['id'];
+            $url=domain_url()."jdocweb/index.php/sys_viewcontroller/test_sync_timbrature/$dipendente_id"; 
+            $feedback=file_get_contents($url);
+            echo $feedback;
+        }    
+        
+    }
+    
+    function test_sync_timbrature($test)
+    {
+        echo $test;
+    }
+    
     
     
            
