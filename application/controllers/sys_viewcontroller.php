@@ -16691,8 +16691,15 @@ GROUP BY user_contratti.recordid_
     
     function add_custom_update_php_sync_timbrature()
     { 
+        $rows= $this->Sys_model->db_get('user_presenzemensili','*',"anno=2023 and mese=7");
+        foreach ($rows as $key => $row) {
+            var_dump($row);
+            echo $row['recordid_']."<br/>";
+            
+            //$this->Sys_model->add_custom_update_php('custom_3p_sync_timbrature',$row['recordid_']);
+        }
         
-        $this->Sys_model->add_custom_update_php('custom_3p_sync_timbrature','00000000000000000000000000047592');
+        
     }
     
     function custom_3p_sync_timbrature($recordid_presenze)
@@ -16704,6 +16711,8 @@ GROUP BY user_contratti.recordid_
             $dipendente_id=$presenze['id'];
             $url=domain_url()."bixdata/index.php/bix_datagateway_controller/custom_sync_rapportidilavoro//$dipendente_id"; 
             $feedback=file_get_contents($url);
+            echo $feedback;
+            $feedback=$this->Sys_model->add_custom_update_php('aggiorna_presenze',$recordid_presenze);
             echo $feedback;
         }    
         
