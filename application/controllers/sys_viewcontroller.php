@@ -16719,7 +16719,7 @@ GROUP BY user_contratti.recordid_
         
     }
     
-    function test_sync_timbrature($test)
+    public function test_sync_timbrature($test)
     {
         echo $test;
     }
