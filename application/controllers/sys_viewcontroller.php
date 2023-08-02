@@ -16691,7 +16691,7 @@ GROUP BY user_contratti.recordid_
     
     function add_custom_update_php_sync_timbrature()
     { 
-        $rows= $this->Sys_model->db_get('user_presenzemensili','*',"anno=2023 and mese=7");
+        $rows= $this->Sys_model->db_get('user_presenzemensili','*',"anno=2023 and mese=7 and recordid_='00000000000000000000000000047475'");
         foreach ($rows as $key => $row) {
             
             echo $row['recordid_']." - ID: ".$row['id']."<br/><br/>";
