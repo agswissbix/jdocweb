@@ -16710,7 +16710,7 @@ GROUP BY user_contratti.recordid_
         {
             $dipendente_id=$presenze['id'];
             //$url=domain_url()."bixdata/index.php/bix_datagateway_controller/custom_sync_rapportidilavoro//$dipendente_id";
-            $url=domain_url()."jdocweb/index.php/sys_viewcontroller/test_sync_timbrature//$dipendente_id";
+            $url=domain_url()."jdocweb_test/index.php/sys_viewcontroller/test_sync_timbrature//$dipendente_id";
             $feedback=file_get_contents($url);
             echo $feedback;
             $feedback=$this->Sys_model->add_custom_update_php('aggiorna_presenze',$recordid_presenze);
