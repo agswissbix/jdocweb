@@ -16693,10 +16693,10 @@ GROUP BY user_contratti.recordid_
     { 
         $rows= $this->Sys_model->db_get('user_presenzemensili','*',"anno=2023 and mese=7");
         foreach ($rows as $key => $row) {
-            var_dump($row);
-            echo $row['recordid_']."<br/>";
             
-            //$this->Sys_model->add_custom_update_php('custom_3p_sync_timbrature',$row['recordid_']);
+            echo $row['recordid_']." - ID: ".$row['id']."<br/><br/>";
+            
+            $this->Sys_model->add_custom_update_php('custom_3p_sync_timbrature',$row['recordid_']);
         }
         
         
