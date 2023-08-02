@@ -16711,10 +16711,21 @@ GROUP BY user_contratti.recordid_
             $dipendente_id=$presenze['id'];
             $url=domain_url()."bixdata/index.php/bix_datagateway_controller/custom_sync_rapportidilavoro/$dipendente_id";
             //$url=domain_url()."jdocweb_test/index.php/sys_viewcontroller/test_sync_timbrature/$dipendente_id";
-            $feedback=file_get_contents($url);
+            $context = stream_context_create([
+                'http' => [
+                    'timeout' => 600, // Set the timeout value in seconds (e.g., 10 seconds)
+                ],
+            ]);
+
+            $feedback=file_get_contents($url, false, $context);
             echo $feedback;
-            $feedback=$this->Sys_model->add_custom_update_php('aggiorna_presenze',$recordid_presenze);
-            echo $feedback;
+            if ($feedback === false) {
+                // Handle the error when the request fails
+                echo "Error: " . implode(', ', error_get_last());
+            } else {
+                $feedback=$this->Sys_model->add_custom_update_php('aggiorna_presenze',$recordid_presenze);
+            }
+            
         }    
         
     }
