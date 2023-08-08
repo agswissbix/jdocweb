@@ -16723,7 +16723,8 @@ GROUP BY user_contratti.recordid_
                 // Handle the error when the request fails
                 echo "Error: " . implode(', ', error_get_last());
             } else {
-                $feedback=$this->Sys_model->add_custom_update_php('aggiorna_presenze',$recordid_presenze);
+                $this->aggiorna_presenze($recordid_presenze);
+                //$feedback=$this->Sys_model->add_custom_update_php('aggiorna_presenze',$recordid_presenze);
             }
             
         }    
